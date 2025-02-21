@@ -15,8 +15,8 @@ public class DialogManager : MonoBehaviour
 
     [Header("Modifiers")]
     public KeyCode interactKey = KeyCode.E;
-    public float normalSpeed;
-    public float quickSpeed;
+    public float normalSpeed = 0.03f;
+    public float quickSpeed = 0;
     [HideInInspector] public float speed = 1;
 
     private bool isActiveDialog = false;

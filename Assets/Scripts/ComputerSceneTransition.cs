@@ -26,8 +26,8 @@ public class ComputerSceneTransition : MonoBehaviour
         cam = Camera.main;
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         if (instance == null) instance = this;
-        //ZoomIn(0);
-        ZoomOut();
+        ZoomIn(0);
+        //ZoomOut();
     }
     private void Update()
     {

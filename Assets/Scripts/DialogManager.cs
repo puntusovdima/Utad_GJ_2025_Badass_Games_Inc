@@ -40,6 +40,7 @@ public class DialogManager : MonoBehaviour
         NewDialog(new string[] {msg}, npcSprite);
     }
 
+    /// <param name="npcSprite">int [0, 6]</param>
     public void NewDialog(string[] msg, int spriteSpriteIndx)
     { NewDialog(msg, characterSprites[spriteSpriteIndx]); }
     public void NewDialog(string[] msg, Sprite npcSprite)

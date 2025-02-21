@@ -6,12 +6,25 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     [SerializeField] float stepSoundRate;
+    int randomIndex = 0;
+    [Header("Sounds")]
     [SerializeField] AudioSource introSound;
-    [SerializeField] AudioSource stepSound;
+    [SerializeField] List<AudioSource> stepSounds = new List<AudioSource>();
+
     private void Awake()
     {
         if (instance == null) instance = this;
+        PlayStepSound();
     }
+
+
+    #region helper functions
+    float GetRandomPitch()
+    {
+        return Random.Range(1f, 1.8f);
+    }
+    #endregion
+
 
 
     public void PlayIntroSound()
@@ -28,6 +41,9 @@ public class AudioManager : MonoBehaviour
     }
     void StepSoundRepetition()
     {
-        stepSound.Play();
+        Debug.Log("Play sound step " + randomIndex);
+        randomIndex = Random.Range(0, stepSounds.Count);
+        stepSounds[randomIndex].pitch = GetRandomPitch();
+        stepSounds[randomIndex].Play();
     }
 }

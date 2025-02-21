@@ -748,7 +748,6 @@ GameObject:
   - component: {fileID: 1085902767}
   - component: {fileID: 1085902766}
   - component: {fileID: 1085902765}
-  - component: {fileID: 1085902768}
   m_Layer: 5
   m_Name: FadeIn Image
   m_TagString: Untagged
@@ -783,9 +782,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085902763}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c78c5feb2c8e25f4cbc5c007e1108dab, type: 2}
+  m_Controller: {fileID: 9100000, guid: ca21b60307173dc428820de772f2233a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -834,22 +833,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085902763}
   m_CullTransparentMesh: 1
---- !u!111 &1085902768
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1085902763}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: fc38ee42805bb9d4a961756f5de70b03, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: fc38ee42805bb9d4a961756f5de70b03, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1535708879
 GameObject:
   m_ObjectHideFlags: 0
@@ -1333,19 +1316,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184487dab6c710e4481dd1b9e1c55639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionSceneIndex: 0
+  zoomOutTargetPosition: {x: 0, y: 0, z: -10}
   zoomSpeed: 0.0035
   fadeInStart: 2000
   zoomTarget: {fileID: 1731446512}
-  fadeInAnim: {fileID: 1085902768}
+  fadeInAnim: {fileID: 1085902765}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1983403682}
+  - {fileID: 1635871421}
   - {fileID: 1535708881}
   - {fileID: 586463435}
   - {fileID: 401532915}
   - {fileID: 1731446512}
-  - {fileID: 1635871421}
   - {fileID: 938252268}

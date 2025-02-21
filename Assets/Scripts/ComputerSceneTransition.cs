@@ -4,49 +4,60 @@ using UnityEngine.SceneManagement;
 
 public class ComputerSceneTransition : MonoBehaviour
 {
+    ComputerSceneTransition instance;
     Camera cam;
-    [SerializeField] int transitionSceneIndex;
+    [Tooltip("Probably the same as the location of camera on start")]
+    [SerializeField] Vector3 zoomOutTargetPosition;
     [Header("Zoom Parameters")]
     [SerializeField] float zoomSpeed;
     [SerializeField] int fadeInStart;
     [SerializeField] Transform zoomTarget;
     [Header("Animation Parameters")]
-    [SerializeField] Animation fadeInAnim;
-    bool zoomIn;
+    [SerializeField] Animator fadeInAnim;
+    bool zoom;
     Vector3 targetPosition;
+    float targetCameraSize;
 
 
     private void Awake()
     {
         cam = Camera.main;
+        if (instance == null) instance = this;
+        //ZoomIn(0);
+        ZoomOut();
     }
     private void Update()
     {
-        if (zoomIn) { 
-            transform.position = Vector3.Lerp(transform.position, zoomTarget.position, zoomSpeed);
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, 1.8f, zoomSpeed);
+        if (zoom) { 
+            transform.position = Vector3.Lerp(transform.position, targetPosition, zoomSpeed);
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, zoomSpeed);
         }
     }
 
 
-    public void ZoomIn()
+    public async void ZoomIn(int transitionSceneIndex)
     {
-        zoomIn = true;
+        zoom = true;
         targetPosition = zoomTarget.position - transform.forward;
+        targetCameraSize = 1.8f;
+        await Task.Delay(fadeInStart);
+        fadeInAnim.SetTrigger("FadeIn");
+        await Task.Delay(3000);
         TransitionToNextScene(transitionSceneIndex);
     }
     public void ZoomOut()
     {
         cam.orthographicSize = 1.8f;
-        //
+        transform.position = zoomTarget.position - transform.forward;
+        targetPosition = zoomOutTargetPosition;
+        targetCameraSize = 5f;
+        fadeInAnim.SetTrigger("FadeOut");
+        zoom = true;
     }
 
 
-    private async void TransitionToNextScene(int sceneIndex)
+    private void TransitionToNextScene(int sceneIndex)
     {
-        await Task.Delay(fadeInStart);
-        fadeInAnim.Play();
-        await Task.Delay(3000);
         SceneManager.LoadScene(sceneIndex);
     }
 }

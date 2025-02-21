@@ -14,6 +14,7 @@ public class PlayerInteract : MonoBehaviour
     private void Start()
     {
         // interactLayer= LayerMask.NameToLayer("Interactions");
+        interactLayer = LayerMask.GetMask("Interactions");
     }
 
     private void Update()

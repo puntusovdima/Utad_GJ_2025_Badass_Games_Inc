@@ -3,12 +3,14 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D _rb;
+    public StateManager sm;
     public float speed = 5f;
     public bool canMove = true;
 
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        sm = GetComponent<StateManager>();
     }
 
     private void FixedUpdate()

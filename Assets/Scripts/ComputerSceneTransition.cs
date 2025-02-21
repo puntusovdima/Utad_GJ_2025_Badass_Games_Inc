@@ -6,6 +6,7 @@ public class ComputerSceneTransition : MonoBehaviour
 {
     ComputerSceneTransition instance;
     Camera cam;
+    PlayerMovement playerMovement;
     [Tooltip("Probably the same as the location of camera on start")]
     [SerializeField] Vector3 zoomOutTargetPosition;
     [Header("Zoom Parameters")]
@@ -22,6 +23,7 @@ public class ComputerSceneTransition : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         if (instance == null) instance = this;
         //ZoomIn(0);
         ZoomOut();
@@ -31,12 +33,19 @@ public class ComputerSceneTransition : MonoBehaviour
         if (zoom) { 
             transform.position = Vector3.Lerp(transform.position, targetPosition, zoomSpeed);
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, zoomSpeed);
+
+            if (Vector3.Distance(transform.position, targetPosition) <= 0.5f) { 
+                zoom = false;
+                playerMovement.canMove = true;
+            }
         }
+        else transform.parent = playerMovement.transform;
     }
 
 
     public async void ZoomIn(int transitionSceneIndex)
     {
+        transform.parent = null;
         zoom = true;
         targetPosition = zoomTarget.position - transform.forward;
         targetCameraSize = 1.8f;
@@ -47,6 +56,8 @@ public class ComputerSceneTransition : MonoBehaviour
     }
     public void ZoomOut()
     {
+        transform.parent = null;
+        playerMovement.canMove = false;
         cam.orthographicSize = 1.8f;
         transform.position = zoomTarget.position - transform.forward;
         targetPosition = zoomOutTargetPosition;

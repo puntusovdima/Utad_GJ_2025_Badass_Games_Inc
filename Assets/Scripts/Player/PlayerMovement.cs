@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D _rb;
     public float speed = 5f;
+    public bool canMove = true;
 
     private void Start()
     {
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!canMove) return;
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput > 0)
         {

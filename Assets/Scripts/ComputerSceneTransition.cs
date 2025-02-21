@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class ComputerSceneTransition : MonoBehaviour
 {
@@ -34,9 +35,10 @@ public class ComputerSceneTransition : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position, targetPosition, zoomSpeed);
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, zoomSpeed);
 
-            if (Vector3.Distance(transform.position, targetPosition) <= 0.5f) { 
+            if (Vector3.Distance(transform.position, targetPosition) <= 0.1f) { 
                 zoom = false;
                 playerMovement.canMove = true;
+                GetComponent<CinemachineBrain>().enabled = true;
             }
         }
         else transform.parent = playerMovement.transform;
@@ -45,7 +47,8 @@ public class ComputerSceneTransition : MonoBehaviour
 
     public async void ZoomIn(int transitionSceneIndex)
     {
-        transform.parent = null;
+        GetComponent<CinemachineBrain>().enabled = false;
+        playerMovement.canMove = false;
         zoom = true;
         targetPosition = zoomTarget.position - transform.forward;
         targetCameraSize = 1.8f;
@@ -56,7 +59,8 @@ public class ComputerSceneTransition : MonoBehaviour
     }
     public void ZoomOut()
     {
-        transform.parent = null;
+        GetComponent<CinemachineBrain>().enabled = false;
+        playerMovement.transform.position = new Vector3(4.47f, -2.95f, 0);
         playerMovement.canMove = false;
         cam.orthographicSize = 1.8f;
         transform.position = zoomTarget.position - transform.forward;

@@ -6,11 +6,11 @@ public class Template_Breakable_Plataforms : MonoBehaviour
 {   
     Transform plat_t;
     float timer = 1f;
-    float timer2 = 0.3f;
+    float timer2 = 0.5f;
 
     float timer3 = 5f;
     float cur_timer = 1f;
-    float cur_timer2 = 0.3f;
+    float cur_timer2 = 0.5f;
     float cur_timer3 = 5f;
     int cd = 0;
     int cd2 = 0;

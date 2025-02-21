@@ -28,13 +28,13 @@ public class DialogManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
+        else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
     }
 
+    /// <param name="npcSprite">int [0, 6]</param>
     public void NewDialog(string msg, int spriteSpriteIndx)
     { NewDialog(msg, characterSprites[spriteSpriteIndx]); }
-
-    /// <param name="npcSprite">int [0, 6]</param>
     public void NewDialog(string msg, Sprite npcSprite)
     {
         NewDialog(new string[] {msg}, npcSprite);

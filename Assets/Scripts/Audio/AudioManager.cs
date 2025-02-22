@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     [SerializeField] float stepSoundRate;
+    bool playingStepSounds;
     int randomIndex = 0;
     [Header("Sounds")]
     [SerializeField] AudioSource introSound;
@@ -25,7 +26,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null) instance = this;
 
         //A List of public methods:
-        PlayIntroSound();
+        //PlayIntroSound();
         //PlayStepSound();
         //StopStepSound();
 
@@ -61,12 +62,11 @@ public class AudioManager : MonoBehaviour
         blablaSounds[0].Play();
     }
 
-    public void SetBlablaSound(int configNumber, AudioSource blablaSource, ref float blablaFrequency)
+    public void SetBlablaSound(int configNumber, AudioSource blablaSource)
     {
         blablaConfig = blablaConfigs[configNumber];
         blablaSource.clip = blablaConfig.GetRandomClip();
         blablaSource.pitch = blablaConfig.GetRandomPitch();
-        blablaFrequency = blablaConfig.frequency;
     }
     public void PlayJumpSound()
     {
@@ -103,15 +103,19 @@ public class AudioManager : MonoBehaviour
     #region step sounds
     public void StopStepSound()
     {
+        if (!playingStepSounds) return;
+        playingStepSounds = false;
         CancelInvoke("StepSoundRepetition");
     }
     public void PlayStepSound()
     {
+        if (playingStepSounds) return;
+        playingStepSounds = true;
         InvokeRepeating("StepSoundRepetition", 0f, stepSoundRate);
     }
     void StepSoundRepetition()
     {
-        Debug.Log("Play sound step " + randomIndex);
+        //Debug.Log("Play sound step " + randomIndex);
         randomIndex = Random.Range(0, stepSounds.Count);
         stepSounds[randomIndex].pitch = GetRandomPitch();
         stepSounds[randomIndex].Play();

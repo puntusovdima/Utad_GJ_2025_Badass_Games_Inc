@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = new Vector2(horizontalInput * Time.fixedDeltaTime * speed, 0);
         _rb.MovePosition(_rb.position + move);
         // _rb.velocity += move;
-        
+
+        if (move.magnitude > 0) AudioManager.instance.PlayStepSound();
+        else AudioManager.instance.StopStepSound();
     }
 }

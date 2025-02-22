@@ -26,6 +26,13 @@ public class ComputerSceneTransition : MonoBehaviour
         cam = Camera.main;
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         if (instance == null) instance = this;
+
+        if (StateManager.instance.miniGameCompleteCount > 0) {
+            ZoomOut();
+            //await Task.Delay(500);
+            Debug.Log("TELEPORT");
+            playerMovement.transform.position = new Vector3(68f, -3.06f, 0);
+        }
     }
     private void Update()
     {
@@ -39,7 +46,7 @@ public class ComputerSceneTransition : MonoBehaviour
                 GetComponent<CinemachineBrain>().enabled = true;
             }
         }
-        else transform.parent = playerMovement.transform;
+        //else transform.parent = playerMovement.transform;
     }
 
 
@@ -52,7 +59,7 @@ public class ComputerSceneTransition : MonoBehaviour
         targetCameraSize = 1.8f;
         await Task.Delay(fadeInStart);
         fadeInAnim.SetTrigger("FadeIn");
-        await Task.Delay(3000);
+        await Task.Delay(5000);
         TransitionToNextScene(transitionSceneIndex);
     }
     public void ZoomOut()
@@ -63,7 +70,7 @@ public class ComputerSceneTransition : MonoBehaviour
         cam.orthographicSize = 1.8f;
         transform.position = zoomTarget.position - transform.forward;
         targetPosition = zoomOutTargetPosition;
-        targetCameraSize = 5f;
+        targetCameraSize = 3.27f;
         fadeInAnim.SetTrigger("FadeOut");
         zoom = true;
     }

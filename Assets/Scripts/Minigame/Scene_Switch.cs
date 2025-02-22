@@ -20,6 +20,7 @@ public class Scene_Switch : MonoBehaviour
         for(int i = 0;i < hit.Length ; i++){
             if(hit[i].tag == "player"){
                 //we switch scenes
+                StateManager.instance.CompleteMiniGame();
                 SceneManager.LoadScene(1);
             }
         }

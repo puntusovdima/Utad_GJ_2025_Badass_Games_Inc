@@ -937,6 +937,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 709187938209291, guid: f462fcf86904bb84b9bb29b3fee5e333, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 709187938209291, guid: f462fcf86904bb84b9bb29b3fee5e333, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 8bc9486f3d7cb81418199168fe08a19b, type: 2}
@@ -1011,7 +1015,7 @@ PrefabInstance:
     - target: {fileID: 9105142002868231331, guid: f462fcf86904bb84b9bb29b3fee5e333, type: 3}
       propertyPath: animatorController
       value: 
-      objectReference: {fileID: 9100000, guid: 936bf1bb8a9f73f41a7fd0c873e9a028, type: 2}
+      objectReference: {fileID: 9100000, guid: 8bc9486f3d7cb81418199168fe08a19b, type: 2}
     m_RemovedComponents:
     - {fileID: 9068938581654541986, guid: f462fcf86904bb84b9bb29b3fee5e333, type: 3}
     m_RemovedGameObjects: []
@@ -3745,7 +3749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184487dab6c710e4481dd1b9e1c55639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomOutTargetPosition: {x: 4.47, y: -0.37, z: -10}
+  zoomOutTargetPosition: {x: 68.474, y: -1.1295, z: -10}
   zoomSpeed: 0.008
   fadeInStart: 1000
   zoomTarget: {fileID: 1231905862}

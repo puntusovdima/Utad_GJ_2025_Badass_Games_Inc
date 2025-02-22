@@ -186,11 +186,13 @@ public class InteractionsManager : MonoBehaviour
     {
         if (canComputer)
         {
+            Debug.Log("can computer reset dialogues");
             canComputer = false;
             stateManager.ResetDialogs();
 
             if (stateManager.state < 2) {
                 SetState(2);
+                AudioManager.instance.PlayComputerStartUpSound();
                 Camera.main.GetComponent<ComputerSceneTransition>().ZoomIn(2);
             }
             else if (stateManager.state < 4)

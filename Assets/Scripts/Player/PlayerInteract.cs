@@ -35,6 +35,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else if (hit == null && interactButton != null || interactionManager.DialogManager.dialogBox.activeSelf)
         {
+            if (interactButton == null) return;
             interactButton.ShowButton(false);
             interactButton = null;
         }

@@ -7,9 +7,10 @@ public class TaskManager : MonoBehaviour
     [Header("References")]
     public TMPro.TextMeshProUGUI subtask;
     public Animator anim;
+
     void Start()
     {
-        HideTasks();
+        
     }
 
     void Update()
@@ -18,9 +19,9 @@ public class TaskManager : MonoBehaviour
     }
 
 
-    public void HideTasks()
+    public void EnQuitTasks()
     {
-        anim.SetTrigger("Hide");
+        anim.SetTrigger("Quit");
     }
 
     public void SetSubtask(string newSubtask)

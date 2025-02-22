@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e279f70580ee54db4abe831d80c225, type: 3}
+  m_Name: Sam Config
+  m_EditorClassIdentifier: 
+  beeps:
+  - {fileID: 8300000, guid: 77875a02f6f61114597b13c48e8a8623, type: 3}
+  minPitch: 0.7
+  maxPitch: 1.2

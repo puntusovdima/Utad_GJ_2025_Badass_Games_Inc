@@ -26,6 +26,7 @@ public class DialogManager : MonoBehaviour
     public float quickSpeed = 0;
     [HideInInspector] public float speed = 1;
     [HideInInspector] public Sprite lastSpeaker = null;
+    [HideInInspector] public Sprite lastSpeakerSprite = null;
 
     //Privates
     private bool isActiveDialog = false;
@@ -45,8 +46,27 @@ public class DialogManager : MonoBehaviour
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
 
-        string[] dialogs = new string[]{ "a", "b" };
-        if (Input.GetKey(interactKey) && !isActiveDialog) NewDialog(dialogs, 0, false);
+
+        //TEST FOR SCENE "TestingUI"
+        string[] dialogs = new string[]{ "Lorem Ipsum, ladies and gentlemen", "Orange juice is the best" };
+        if (Input.GetKey(interactKey) && !isActiveDialog) { 
+            NewDialog(dialogs, 0, true); //Dmitrii
+            dialogs = new string[] { "Original Jamaican!?", "No way" };
+            NewDialog(dialogs, 4, true); //Sam
+            dialogs = new string[] { "You are at it again! Get back to work!", "OJ means original... jam... game!" };
+            NewDialog(dialogs, 6, true); //Alyta
+            dialogs = new string[] { "Alyta is right we should merge back to work", "Let's commit to this!" };
+            NewDialog(dialogs, 3, true); //Mario
+            dialogs = new string[] { "...", "..." };
+            NewDialog(dialogs, 1, true); //Alba
+            dialogs = new string[] { "...", "..." };
+            NewDialog(dialogs, 2, true); //Dani
+            dialogs = new string[] { "...", "..." };
+            NewDialog(dialogs, 5, true); //Andrey
+            dialogs = new string[] { "...", "..." };
+            NewDialog(dialogs, null, false); //Senen
+        }
+        //
     }
 
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
@@ -57,8 +77,8 @@ public class DialogManager : MonoBehaviour
     public void NewDialog(string[] msg, int spriteSpriteIndx, bool npcTalking)
     { NewDialog(msg, characterSprites[spriteSpriteIndx], npcTalking); }
 
-    public void NewDialog(string msg, bool npcTalking) { NewDialog(msg, lastSpeaker, npcTalking); }
-    public void NewDialog(string[] msg, bool npcTalking) { NewDialog(msg, lastSpeaker, npcTalking); }
+    public void NewDialog(string msg, bool npcTalking) { NewDialog(msg, lastSpeakerSprite, npcTalking); }
+    public void NewDialog(string[] msg, bool npcTalking) { NewDialog(msg, lastSpeakerSprite, npcTalking); }
 
     public void NewDialog(string msg, Sprite npcSprite, bool npcTalking)
     {
@@ -72,7 +92,8 @@ public class DialogManager : MonoBehaviour
             dialogCharacterSpritesQueue.Add(npcSprite);
             isNpcTalkingBoolQueue.Add(npcTalking);
         }
-        lastSpeaker = npcSprite;
+        lastSpeakerSprite = npcSprite;
+        //Debug.Log("Last speaker is " + characterSprites.IndexOf(lastSpeaker));
     }
 
     public void ResetDialogAnimators()
@@ -121,6 +142,7 @@ public class DialogManager : MonoBehaviour
                     string npcName = "";
                     if (npcSprite != null) npcName = npcNames[characterSprites.IndexOf(npcSprite)];
                     dialogSpeaker.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = npcName;
+                    lastSpeaker = npcSprite;
 
                     if (isNpcTalking)
                     {
@@ -153,7 +175,8 @@ public class DialogManager : MonoBehaviour
         {
 
             dialogText.text = dialogText.text + c;
-            // playCharSound;
+            if(lastSpeaker != null) AudioManager.instance.PlayBlablaSound(characterSprites.IndexOf(lastSpeaker));
+            else AudioManager.instance.PlayBlablaSound(7);
 
             yield return new WaitForSecondsRealtime(speed);
         }

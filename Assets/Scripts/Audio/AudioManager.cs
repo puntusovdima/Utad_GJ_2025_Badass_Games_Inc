@@ -17,6 +17,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource interactSound;
     [SerializeField] AudioSource pressedButtonSound;
     [SerializeField] List<AudioSource> computerSounds = new List<AudioSource>();
+    [SerializeField] List<BlablaConfig> blablaConfigs = new List<BlablaConfig>();
+    BlablaConfig blablaConfig;
 
     private void Awake()
     {
@@ -59,16 +61,12 @@ public class AudioManager : MonoBehaviour
         blablaSounds[0].Play();
     }
 
-    public void PlayBlaBlaMale()
+    public void SetBlablaSound(int configNumber, AudioSource blablaSource, ref float blablaFrequency)
     {
-        blablaSounds[0].pitch = GetRandomPitch();
-        blablaSounds[0].Play();
-    }
-    public void PlayBlaBlaFemale()
-    {
-        blablaSounds[1].pitch = GetRandomPitch();
-        blablaSounds[1].Play();
-
+        blablaConfig = blablaConfigs[configNumber];
+        blablaSource.clip = blablaConfig.GetRandomClip();
+        blablaSource.pitch = blablaConfig.GetRandomPitch();
+        blablaFrequency = blablaConfig.frequency;
     }
     public void PlayJumpSound()
     {

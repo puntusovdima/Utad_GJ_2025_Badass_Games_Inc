@@ -2167,6 +2167,8 @@ MonoBehaviour:
   - {fileID: 1679454462}
   - {fileID: 853288424}
   - {fileID: 161473289}
+  blablaConfigs:
+  - {fileID: 11400000, guid: dd6710539b724ac4bb6a79542613e7c8, type: 2}
 --- !u!4 &1667222421
 Transform:
   m_ObjectHideFlags: 0

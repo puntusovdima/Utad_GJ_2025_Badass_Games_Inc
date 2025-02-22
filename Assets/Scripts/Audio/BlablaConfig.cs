@@ -9,4 +9,13 @@ public class BlablaConfig : ScriptableObject
     public float frequency = 0.2f;
     public float minPitch;
     public float maxPitch;
+
+    public AudioClip GetRandomClip()
+    {
+        return beeps[Random.Range(0, beeps.Count)];
+    }
+    public float GetRandomPitch()
+    {
+        return Random.Range(minPitch, maxPitch);
+    }
 }

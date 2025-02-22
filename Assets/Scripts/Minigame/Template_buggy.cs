@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Template_buggy : MonoBehaviour
 {
     Transform origin_t;
     Rigidbody2D origin_r;
     BoxCollider2D origin_c;
-
     GameObject dumb_ah;
-
-
     Collider2D player;
     int is_frozen = 0;
     float tot = 0f;
@@ -31,9 +29,20 @@ public class Template_buggy : MonoBehaviour
     float add = 0f;
     float add_t = 0f;
 
+    //yall gonna kill me
+    //4th timer
+    float timer4 = 2f;
+    float cur_timer4 = 2f;
+    int cd4 = 0;
+
     //camera stuff
     Camera cam;
     int shake_lock;
+
+    bool restart = false;
+    public bool to_change = false;
+
+    bool what;
     void Start()
     {
         //assigning variables
@@ -52,6 +61,12 @@ public class Template_buggy : MonoBehaviour
         }
 
         Collider2D[] hit = Physics2D.OverlapCircleAll(origin_t.position,1.4f);
+        what = GameObject.Find("Template_player").GetComponent<Template_Player_Movement>().propulse;
+        Debug.Log(what);
+        if(what == true){
+            Debug.Log("a");
+            hit[0] = GameObject.Find("Template_player").GetComponent<Collider2D>();
+        }
         for(int i = 0;i<hit.Length;i++){
             if(hit[i].tag == "player"){
                 cd = 1;
@@ -79,6 +94,14 @@ public class Template_buggy : MonoBehaviour
                 player.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
                 player.gameObject.GetComponent<Renderer>().enabled = true;
                 locka = 0;
+                
+                //here everything restarts in this death case
+                to_change = false;
+                if(restart == true){
+                    to_change = true;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    restart = false;
+                }
             }
         }
 
@@ -92,7 +115,6 @@ public class Template_buggy : MonoBehaviour
                 add = (add - 0.2f) * 1.03f;
                 add_t = add * 0.05f;
             } else {
-                Debug.Log("a");
                 if(cd2 == 0){
                     cd2 = 1;
                     if(shake_lock == 0){
@@ -120,6 +142,28 @@ public class Template_buggy : MonoBehaviour
 
         }
 
+        //after meeting the billion conditions lets check for the player
+        Collider2D[] chase = Physics2D.OverlapCircleAll(origin_t.position,6f);
+        for(int i=0;i<chase.Length;i++){
+            if(chase[i].tag == "player"){
+                if(cd4 == 0){
+                    origin_r.AddForce(new Vector2(chase[i].gameObject.GetComponent<Transform>().position.x - origin_t.position.x,
+                                                    chase[i].gameObject.GetComponent<Transform>().position.y - origin_t.position.y),
+                                                    ForceMode2D.Impulse);
+                    cd4 = 1;
+                }
+                
+            }
+        }
+
+        if(cd4 == 1){
+            cur_timer4 -= Time.deltaTime;
+            if(cur_timer4 < 0){
+                cur_timer4 = timer4;
+                cd4 = 0;
+            }
+        }
+
     }
     void Launch()
     {
@@ -137,6 +181,7 @@ public class Template_buggy : MonoBehaviour
             add_t = 0f;
             cur_timer2 = 1f;
             cd2 = 0;
+            restart = true;
 
             if(shake_lock == 1){
                 shake_lock = 2;
@@ -154,7 +199,7 @@ public class Template_buggy : MonoBehaviour
     }
     void OnDrawGizmos(){
         if(origin_t != null){
-            Gizmos.DrawSphere(origin_t.position,1f);
+            Gizmos.DrawSphere(origin_t.position,6f);
         }
     }
 }

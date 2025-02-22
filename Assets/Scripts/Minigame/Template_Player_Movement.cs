@@ -22,6 +22,13 @@ public class Template_Player_Movement : MonoBehaviour
     float jump_tim = 0.5f;
     float jump_tim_t = 0.5f;
     public int is_jumping = 0;
+
+
+    float time = 20f;
+    float timer = 1f;
+    float cur_timer = 1f;
+    public bool propulse = false;
+    int no = 0;
     void Start()
     {
         //obtaining variables
@@ -43,6 +50,7 @@ public class Template_Player_Movement : MonoBehaviour
         VerticalMove();
         Hand();
         Cam();
+        Time_pas();
     }
 
     void HorizontalMove()
@@ -102,7 +110,25 @@ public class Template_Player_Movement : MonoBehaviour
         for(int i=0;i<hit.Length;i++){
             if(hit[i].tag == "clock"){
                 hit[i].gameObject.GetComponent<Renderer>().enabled = false;
+                hit[i].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                time += 7f;
             }
+        }
+    }
+
+    void Time_pas(){
+        //will reduce by one second
+        cur_timer -= Time.deltaTime;
+        if(cur_timer <= 0){
+            cur_timer = timer;
+            time -= 1;
+            Debug.Log(time);
+        }
+
+        propulse = false;
+        if(time <= 0 && no == 0){
+            propulse = true;
+            no = 1;
         }
     }
 

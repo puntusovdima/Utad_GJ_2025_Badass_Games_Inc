@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Scene_Switch : MonoBehaviour
 {
@@ -17,7 +19,8 @@ public class Scene_Switch : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapBoxAll(origin_t.position,new Vector2(20f,20f),0f);
         for(int i = 0;i < hit.Length ; i++){
             if(hit[i].tag == "player"){
-                Debug.Log("we switch");
+                //we switch scenes
+                SceneManager.LoadScene(1);
             }
         }
     }

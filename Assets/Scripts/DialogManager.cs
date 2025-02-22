@@ -11,12 +11,14 @@ public class DialogManager : MonoBehaviour
     public GameObject dialogBox;
     public GameObject taskBox;
     public TMPro.TextMeshProUGUI dialogText;
+    public AudioSource audio;
     public Image dialogSpeaker;
     public Image dialogPlayer;
 
     [Header("Lists")]
     public List<Sprite> characterSprites;
     public string[] npcNames;
+    public Color[] alphaManager;
 
     [Header("Modifiers")]
     public KeyCode interactKey = KeyCode.E;
@@ -42,6 +44,9 @@ public class DialogManager : MonoBehaviour
     {
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
+
+        string[] dialogs = new string[]{ "a", "b" };
+        if (Input.GetKey(interactKey) && !isActiveDialog) NewDialog(dialogs, 0, false);
     }
 
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
@@ -67,6 +72,7 @@ public class DialogManager : MonoBehaviour
             dialogCharacterSpritesQueue.Add(npcSprite);
             isNpcTalkingBoolQueue.Add(npcTalking);
         }
+        lastSpeaker = npcSprite;
     }
 
     public void ResetDialogAnimators()
@@ -106,9 +112,14 @@ public class DialogManager : MonoBehaviour
                     string line = dialogLinesQueue[0];
                     Sprite npcSprite = dialogCharacterSpritesQueue[0];
                     bool isNpcTalking = isNpcTalkingBoolQueue[0];
-                    string npcName = npcNames[characterSprites.IndexOf(npcSprite)];
 
+                    if (npcSprite != null) dialogSpeaker.color = alphaManager[0];
+                    else dialogSpeaker.color = alphaManager[1];
                     dialogSpeaker.sprite = npcSprite;
+
+                    
+                    string npcName = "";
+                    if (npcSprite != null) npcName = npcNames[characterSprites.IndexOf(npcSprite)];
                     dialogSpeaker.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = npcName;
 
                     if (isNpcTalking)

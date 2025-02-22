@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     [SerializeField] float stepSoundRate;
+    bool playingStepSounds;
     int randomIndex = 0;
     [Header("Sounds")]
     [SerializeField] AudioSource introSound;
@@ -17,13 +18,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource interactSound;
     [SerializeField] AudioSource pressedButtonSound;
     [SerializeField] List<AudioSource> computerSounds = new List<AudioSource>();
+    [SerializeField] List<BlablaConfig> blablaConfigs = new List<BlablaConfig>();
+    BlablaConfig blablaConfig;
 
     private void Awake()
     {
         if (instance == null) instance = this;
 
         //A List of public methods:
-        PlayIntroSound();
+        //PlayIntroSound();
         //PlayStepSound();
         //StopStepSound();
 
@@ -59,16 +62,11 @@ public class AudioManager : MonoBehaviour
         blablaSounds[0].Play();
     }
 
-    public void PlayBlaBlaMale()
+    public void SetBlablaSound(int configNumber, AudioSource blablaSource)
     {
-        blablaSounds[0].pitch = GetRandomPitch();
-        blablaSounds[0].Play();
-    }
-    public void PlayBlaBlaFemale()
-    {
-        blablaSounds[1].pitch = GetRandomPitch();
-        blablaSounds[1].Play();
-
+        blablaConfig = blablaConfigs[configNumber];
+        blablaSource.clip = blablaConfig.GetRandomClip();
+        blablaSource.pitch = blablaConfig.GetRandomPitch();
     }
     public void PlayJumpSound()
     {
@@ -105,15 +103,19 @@ public class AudioManager : MonoBehaviour
     #region step sounds
     public void StopStepSound()
     {
+        if (!playingStepSounds) return;
+        playingStepSounds = false;
         CancelInvoke("StepSoundRepetition");
     }
     public void PlayStepSound()
     {
+        if (playingStepSounds) return;
+        playingStepSounds = true;
         InvokeRepeating("StepSoundRepetition", 0f, stepSoundRate);
     }
     void StepSoundRepetition()
     {
-        Debug.Log("Play sound step " + randomIndex);
+        //Debug.Log("Play sound step " + randomIndex);
         randomIndex = Random.Range(0, stepSounds.Count);
         stepSounds[randomIndex].pitch = GetRandomPitch();
         stepSounds[randomIndex].Play();

@@ -18,6 +18,7 @@ public class TextTyper : MonoBehaviour
     
     public void TypeText(string text, TMP_Text textOut)
     {
+        AudioManager.instance.SetBlablaSound(0, audio); //sets ONE pitch and audio for ONE character speaking?
         StartCoroutine(TypeTextWithDelay(text, textOut));
     }
 
@@ -34,6 +35,7 @@ public class TextTyper : MonoBehaviour
                 yield break;
             }
             textOut.text += text[i];
+            //AudioManager.instance.SetBlablaSound(0, audio); //sets a pitch and audio clip for EVERY key wrote down
             audio.PlayOneShot(audio.clip);
             yield return new WaitForSeconds(typingDelay);
         }

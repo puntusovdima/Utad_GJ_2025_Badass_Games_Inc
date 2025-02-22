@@ -16,12 +16,13 @@ public class InitialScenePlayerMovement : MonoBehaviour
     private bool isLast = false;
     
     public GameObject titlePositionObject;
+    public StateManager sm;
     public TitleMoveManager titleMoveManager;
     private bool titlePoistionReached = false;
-    
-
     private void Start()
     {
+
+        sm = GameObject.FindGameObjectWithTag("StateManager").GetComponent<StateManager>();
         startPosition = new Vector2(transform.position.x, transform.position.y);
         titlePositionObject = GameObject.Find("TitlePlayerPosition");
         targetPosition = new Vector2(titlePositionObject.transform.position.x, titlePositionObject.transform.position.y);
@@ -30,6 +31,7 @@ public class InitialScenePlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        
         if (!titleMoveManager.animationComplete)
             return;
         if (!titlePoistionReached)
@@ -61,12 +63,15 @@ public class InitialScenePlayerMovement : MonoBehaviour
         currentTime += Time.deltaTime;
         float interpolation = Mathf.Lerp(0f, 1f, currentTime / duration);
         Vector2 move  = Vector2.Lerp(startPosition, targetPosition, interpolation);
-        transform.position = new Vector3(move.X, move.Y, 0);
+        transform.position = new Vector3(move.X, transform.position.y, 0);
         if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y), targetPosition) <= 0.1f)
         {
             if (isLast)
             {
+                sm.state++;
                 SceneManager.LoadScene("LibraryScene");
+                this.enabled = false;
+                yield break;
             }
             this.targetPosition = startPosition;
             startPosition = targetPosition;

@@ -7,9 +7,10 @@ public class TaskManager : MonoBehaviour
     [Header("References")]
     public TMPro.TextMeshProUGUI subtask;
     public Animator anim;
+
     void Start()
     {
-        HideTasks();
+        
     }
 
     void Update()
@@ -18,9 +19,9 @@ public class TaskManager : MonoBehaviour
     }
 
 
-    public void HideTasks()
+    public void EndQuitTasks()
     {
-        anim.SetTrigger("Hide");
+        anim.SetTrigger("Quit");
     }
 
     public void SetSubtask(string newSubtask)
@@ -28,7 +29,11 @@ public class TaskManager : MonoBehaviour
         subtask.text = newSubtask;
     }
 
-    public IEnumerator UpdateSubtask(string newSubtask)
+    public void UpdateSubtask(string newSubtask)
+    {
+        StartCoroutine(UpdateSubtaskCoroutine(newSubtask));
+    }
+    public IEnumerator UpdateSubtaskCoroutine(string newSubtask)
     {
         float seconds = 90f;
         seconds = seconds / 120;

@@ -1,8 +1,10 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D _rb;
+    [SerializeField] public AnimatorController animatorController;
     public StateManager sm;
     public float speed = 5f;
     public bool canMove = true;
@@ -10,12 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        sm = GetComponent<StateManager>();
+        sm = GameObject.FindGameObjectWithTag("StateManager").GetComponent<StateManager>();
     }
 
     private void FixedUpdate()
     {
-        if (!canMove) return;
+        if (!canMove || sm.state == 0) return;
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput > 0)
         {

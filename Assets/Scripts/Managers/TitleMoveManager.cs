@@ -13,7 +13,8 @@ public class TitleMoveManager : MonoBehaviour
 
     void Start()
     {
-        stateManager = GetComponent<StateManager>();
+        // stateManager = GetComponent<StateManager>();
+        stateManager = GameObject.FindGameObjectWithTag("StateManager").GetComponent<StateManager>();
         initY = transform.position.y;
     }
 

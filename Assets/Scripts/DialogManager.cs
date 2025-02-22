@@ -42,12 +42,6 @@ public class DialogManager : MonoBehaviour
     {
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
-<<<<<<< Updated upstream
-=======
-
-        string[] dialogs = new string[]{ "Lorem Ipsum, ladies and gentlemen", "Orange juice is the best" };
-        if (Input.GetKey(interactKey) && !isActiveDialog) NewDialog(dialogs, 0, false);
->>>>>>> Stashed changes
     }
 
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
@@ -149,7 +143,6 @@ public class DialogManager : MonoBehaviour
 
             dialogText.text = dialogText.text + c;
             // playCharSound;
-            AudioManager.instance.PlayBlablaSound(characterSprites.IndexOf(lastSpeaker));
 
             yield return new WaitForSecondsRealtime(speed);
         }

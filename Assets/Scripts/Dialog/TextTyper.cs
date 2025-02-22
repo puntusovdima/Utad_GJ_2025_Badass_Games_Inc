@@ -18,7 +18,7 @@ public class TextTyper : MonoBehaviour
     
     public void TypeText(string text, TMP_Text textOut)
     {
-        //AudioManager.instance.SetBlablaSound(0, audio); //sets ONE pitch and audio for ONE character speaking?
+        AudioManager.instance.SetBlablaSound(0, audio); //sets ONE pitch and audio for ONE character speaking?
         StartCoroutine(TypeTextWithDelay(text, textOut));
     }
 

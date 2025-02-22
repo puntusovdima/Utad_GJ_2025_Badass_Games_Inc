@@ -6,6 +6,7 @@ using UnityEngine;
 public class BlablaConfig : ScriptableObject
 {
     [SerializeField] List<AudioClip> beeps = new List<AudioClip>();
+    public float frequency = 0.2f;
     public float minPitch;
     public float maxPitch;
 

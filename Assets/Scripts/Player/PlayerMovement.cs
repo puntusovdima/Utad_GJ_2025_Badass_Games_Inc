@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] public AnimatorController animatorController;
     public StateManager sm;
     public float speed = 5f;
-    
+    public bool canMove = true;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // if (sm.state == 0) return;
+        if (!canMove || sm.state == 0) return;
         float horizontalInput = Input.GetAxis("Horizontal");
         if (horizontalInput > 0)
         {

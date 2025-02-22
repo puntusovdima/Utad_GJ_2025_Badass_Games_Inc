@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1e279f70580ee54db4abe831d80c225, type: 3}
-  m_Name: Sam Config
+  m_Name: Alba Config
   m_EditorClassIdentifier: 
   beeps:
-  - {fileID: 8300000, guid: 77875a02f6f61114597b13c48e8a8623, type: 3}
-  minPitch: 0.7
-  maxPitch: 1.2
+  - {fileID: 8300000, guid: a05b61dd17daa344485d3fcc0ec723c3, type: 3}
+  minPitch: 1
+  maxPitch: 1.5

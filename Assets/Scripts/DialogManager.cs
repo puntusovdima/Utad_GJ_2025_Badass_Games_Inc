@@ -54,7 +54,6 @@ public class DialogManager : MonoBehaviour
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
     public void NewDialog(string[] msg, int spriteSpriteIndx, bool npcTalking)
     { NewDialog(msg, characterSprites[spriteSpriteIndx], npcTalking); }
-
     public void NewDialog(string msg, bool npcTalking) { NewDialog(msg, lastSpeakerSprite, npcTalking); }
     public void NewDialog(string[] msg, bool npcTalking) { NewDialog(msg, lastSpeakerSprite, npcTalking); }
 

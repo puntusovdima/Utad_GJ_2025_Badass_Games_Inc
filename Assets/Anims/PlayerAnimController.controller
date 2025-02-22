@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vcam: {fileID: 0}
   playerMovement: {fileID: 0}
+  interactionsManager: {fileID: 0}
   cmPosition: {x: -6.2, y: -0.15, z: -10}
 --- !u!1102 &-1985787808762419521
 AnimatorState:

@@ -34,7 +34,7 @@ public class InteractionsManager : MonoBehaviour
         }
         else
         {
-            if (stateManager.state < 2 && stateManager.CheckIfSpokenWithAll())
+            if (stateManager.state < 2 && stateManager.CheckIfSpokenWithAll() && !canComputer)
             {
                 CutsceneManager.PlayCutscene2EndMonologue();
                 canComputer = true;

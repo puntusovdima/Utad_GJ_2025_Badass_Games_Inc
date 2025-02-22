@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0901dd9ac865fa1439860a0e3e37d83f
+guid: e56c11e548653c84d8e04999edf0a95d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,28 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: itch.io_template_0
+      name: itch.io_laptop_disabled_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 5
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe29c15b64eb7f44b107a29dc10073c
+      internalID: 547231822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: itch.io_laptop_disabled
       rect:
         serializedVersion: 2
         x: 0
@@ -111,71 +132,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53c482c8b5caa5c4dbd7727b06b51eb2
-      internalID: 665787315
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: itch.io_template_1
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 0
-        width: 160
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 901b080c0381ca44f8d7b955e4cfb01f
-      internalID: -1379581960
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: itch.io_template_2
-      rect:
-        serializedVersion: 2
-        x: 320
-        y: 0
-        width: 160
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 83b58d363173dbd43936b6f4a56ee4d2
-      internalID: -2054324234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: itch.io_template_3
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 0
-        width: 160
-        height: 90
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ddb8715601136b4983c4fe25f4114d3
-      internalID: -1655916253
+      spriteID: 40afb9ebc14d3e940927ada3a1bc003f
+      internalID: -816981854
       vertices: []
       indices: 
       edges: []
@@ -191,10 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      itch.io_template_0: 665787315
-      itch.io_template_1: -1379581960
-      itch.io_template_2: -2054324234
-      itch.io_template_3: -1655916253
+      itch.io_laptop_disabled: -816981854
+      itch.io_laptop_disabled_0: 547231822
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -44,9 +44,6 @@ public class DialogManager : MonoBehaviour
     {
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
-
-        string[] dialogs = new string[]{ "a", "b" };
-        if (Input.GetKey(interactKey) && !isActiveDialog) NewDialog(dialogs, 0, false);
     }
 
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>

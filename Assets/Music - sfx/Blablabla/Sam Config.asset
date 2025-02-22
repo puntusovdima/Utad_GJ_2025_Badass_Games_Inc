@@ -15,4 +15,4 @@ MonoBehaviour:
   beeps:
   - {fileID: 8300000, guid: 77875a02f6f61114597b13c48e8a8623, type: 3}
   minPitch: 0.7
-  maxPitch: 1.2
+  maxPitch: 0.8

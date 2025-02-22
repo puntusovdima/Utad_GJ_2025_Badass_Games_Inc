@@ -20,8 +20,8 @@ public class Template_buggy : MonoBehaviour
     float cur_timer = 5f;
     int cd = 0;
 
-    float timer2 = 1f;
-    float cur_timer2 = 1f;
+    float timer2 = 0.7f;
+    float cur_timer2 = 0.7f;
     int cd2 = 0;
     int locka = 0;
 
@@ -85,7 +85,6 @@ public class Template_buggy : MonoBehaviour
                 add_t = add * 0.05f;
             } else {
                 if(cd2 == 0){
-                    Debug.Log("a");
                     cd2 = 1;
                 }
             }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    public InteractionsManager interactionManager;
     public Transform actionAnchor;
     public float anchorSizeX = 2f;
     public float anchorSizeY = 2f;
@@ -27,13 +26,13 @@ public class PlayerInteract : MonoBehaviour
     private void Interact()
     {
         Collider2D hit = Physics2D.OverlapBox(actionAnchor.position, new Vector2(anchorSizeX, anchorSizeY), 0, interactLayer);
-        if (hit != null && !interactionManager.DialogManager.dialogBox.activeSelf)
+        if (hit != null)
         {
-            interactionManager.Manager(hit.name);
+            Debug.Log("I am going to interact with: " + hit.name);
             interactButton = hit.gameObject.GetComponent<InteractButton>();
             interactButton.ShowButton(true);
         }
-        else if (hit == null && interactButton != null || interactionManager.DialogManager.dialogBox.activeSelf)
+        else if (hit == null && interactButton != null)
         {
             interactButton.ShowButton(false);
             interactButton = null;

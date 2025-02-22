@@ -27,6 +27,8 @@ public class TextTyper : MonoBehaviour
         // string output;
         for (int i = 0; i < text.Length; i++)
         {
+            if (Input.anyKeyDown)
+                typeAll = true;
             if (typeAll)
             {
                 textOut.text = text;

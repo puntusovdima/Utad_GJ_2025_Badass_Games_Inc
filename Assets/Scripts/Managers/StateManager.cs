@@ -38,7 +38,6 @@ public class StateManager : MonoBehaviour
       {
          case GameState.Cutscene:
             // stop time and movement, cutscene logic
-            ResetDialogs();
             break;
          case GameState.FreeRoam:
             // start time and activate movement

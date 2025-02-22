@@ -5,6 +5,7 @@ using UnityEngine;
 public class CutsceneManager : MonoBehaviour
 {
     [SerializeField] DialogManager dialogueManager;
+    public InteractionsManager interactionsManager;
     public static CutsceneManager instance;
     string[] dimaLines; //0
     string[] albaLines; //1
@@ -18,6 +19,8 @@ public class CutsceneManager : MonoBehaviour
     void Start()
     {
         if (instance == null) instance = this;
+
+        //PlayCutsceneIntro();
         //PlayCutscene1();
         //PlayCutscene2Mario();
         //PlayCutscene2Alba();
@@ -29,24 +32,36 @@ public class CutsceneManager : MonoBehaviour
         //PlayCutscene2EndMonologue();
         //PlayCutscene3();
         //PlayCutscene4Library();
-        //PlayCutscene4AfterExplosion();
+        //PlayCutscene4Mario();
+        //PlayCutscene4Alba();
+        //PlayCutscene4Andrey();
+        //PlayCutscene4Alyta();
+        //PlayCutscene4Dmitrii();
+        //PlayCutscene4Sam();
+        //PlayCutscene4Dani();
+        //PlayCutscene5()
+        //PlayCutscene6()
 
 
     }
 
     //it's in order of appearence,
     //(order from the script document) : top to down:
-    public void PlayCutscene1()
+    public void PlayCutsceneIntro()
     {
         senenLines = new string[] {
         "Wait! Wait! What’s going on here?!",
-        "It is not supposed to be like this! We didn’t even finish the core mechanics! Why intro already started?!",
+        "It's not supposed to be like this! We didn’t even finish the core mechanics yet! Why has the intro already started?!",
         "It’s a disaster. We must step on the gas!",
         "We are absolutely out of time!!!",
-        "I have to tell others…",
-        "Hey, guys… we have the problem…"
+        "I have to tell the others…",
         };
         dialogueManager.NewDialog(senenLines, null, false);
+    }
+
+    public void PlayCutscene1()
+    {
+        dialogueManager.NewDialog("Hey, guys… we have the problem…", null, false);
 
         alytaLines = new string[] {
         "What’s happened?"
@@ -57,7 +72,7 @@ public class CutsceneManager : MonoBehaviour
         "Well...",
         "Did you see the time?"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         dimaLines = new string[] {
         "Yes. And?"
@@ -69,7 +84,7 @@ public class CutsceneManager : MonoBehaviour
         "...",
         "Okay. Let me see what we already have"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
 
     #region cutscene 2 - dialogues with team members and Senen monologue
@@ -78,73 +93,74 @@ public class CutsceneManager : MonoBehaviour
         senenLines = new string[] {
         "Hey. How is the game going?"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, 3, false);
 
         marioLines = new string[] {
-        "Pretty well. We have almost finished the crouching mechanic"
+        "Pretty well. We almost finished the crouching mechanic"
         };
-        dialogueManager.NewDialog(marioLines, 3, true);
+        dialogueManager.NewDialog(marioLines, true);
 
         senenLines = new string[] {
         "But… we don’t even have this mechanic in the game"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
     public void PlayCutscene2Alba()
     {
         senenLines = new string[] {
         "Hello. How are the animators doing?"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, 1, false);
 
         albaLines = new string[] {
         "Hi! Amazing! We are drawing the squirrels"
         };
-        dialogueManager.NewDialog(albaLines, 1, true);
+        dialogueManager.NewDialog(albaLines, true);
 
         senenLines = new string[] {
-        "But the game is about an apple. Why did you th…?"
+        "But the game is about an apple. Why did you…?",
+        "Actually, nevermind"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
     public void PlayCutscene2Andrey()
     {
         senenLines = new string[] {
         "Tell me something good, please"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, 5, false);
 
         andreyLines = new string[] {
         "Great news! I made 5 hours of ASMR whisper!"
         };
-        dialogueManager.NewDialog(andreyLines, 5, true);
+        dialogueManager.NewDialog(andreyLines, true);
 
         senenLines = new string[] {
         "What the f…"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
     public void PlayCutscene2Alyta()
     {
         senenLines = new string[] {
         "Alyta. Tell me, that the things are under control"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, 6, false);
 
         alytaLines = new string[] {
-        "Oh, absolutely. Actually, I just realized, that our idea is not enough good, so we have to fully change the whole concept, and I have a brilliant idea for it!"
+        "Oh, absolutely. Actually, I just realized, that our idea is not good enough, so we have to fully change the whole concept, and I have a brilliant idea for it!"
         };
-        dialogueManager.NewDialog(alytaLines, 6, true);
+        dialogueManager.NewDialog(alytaLines, true);
 
         senenLines = new string[] {
         "..."
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         alytaLines = new string[] {
         "Are you fine? You’re looking a little pale"
         };
-        dialogueManager.NewDialog(alytaLines, 6, true);
+        dialogueManager.NewDialog(alytaLines, true);
     }
     public void PlayCutscene2Dmitrii()
     {
@@ -154,9 +170,9 @@ public class CutsceneManager : MonoBehaviour
         dialogueManager.NewDialog(dimaLines, 0, true);
 
         senenLines = new string[] {
-        "What is an “OJ”…?"
+        "What's “OJ”…?"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
     public void PlayCutscene2Sam()
     {
@@ -168,7 +184,7 @@ public class CutsceneManager : MonoBehaviour
         senenLines = new string[] {
         "Okay… I guess"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
     public void PlayCutscene2Dani()
     {
@@ -178,9 +194,9 @@ public class CutsceneManager : MonoBehaviour
         dialogueManager.NewDialog(daniLines, 2, true);
 
         senenLines = new string[] {
-        "Better not to touch him"
+        "Better don't touch him"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
     }
 
 
@@ -188,8 +204,8 @@ public class CutsceneManager : MonoBehaviour
     public void PlayCutscene2EndMonologue()
     {
         senenLines = new string[] {
-        "This is absolute mess. I must see the prototype myself",
-        "My computer is in another room. Let’s see, what do we have for now"
+        "This is an absolute mess. I have to see the prototype myself",
+        "My computer is on the far right. Let’s see what do we have for now"
         };
         dialogueManager.NewDialog(senenLines, null, false);
     }
@@ -197,6 +213,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayCutscene3()
     {
+        interactionsManager.SetState(3);
         senenLines = new string[] {
         "Jesus Christ! This is horrible! What did these guys do?!",
         "I have to talk seriously with them"
@@ -207,7 +224,7 @@ public class CutsceneManager : MonoBehaviour
     public void PlayCutscene4Library()
     {
         senenLines = new string[] {
-        "Guys. We must talk",
+        "Guys. We have to talk",
         "What’s going on?"
         };
         dialogueManager.NewDialog(senenLines, null, false);
@@ -220,7 +237,7 @@ public class CutsceneManager : MonoBehaviour
         senenLines = new string[] {
         "I mean, it’s already nine! We have to send project before midnight!"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         dimaLines = new string[] {
         "Hey, bro. Calm down. We have plenty of time",
@@ -230,18 +247,18 @@ public class CutsceneManager : MonoBehaviour
         senenLines = new string[] {
         "Plenty of time?! Are you kidding me?!"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         alytaLines = new string[] {
-        "Hey, there is no need to be uncivil",
+        "Hey, there's no need to be rude",
         };
         dialogueManager.NewDialog(alytaLines, 6, true);
 
         senenLines = new string[] {
-        "You really don’t understand?!",
-        "We’re going to fail if we are going work like this!"
+        "Do you really not understand?!",
+        "We’re gonna fail if we work like this!"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         albaLines = new string[] {
         "And who’s to blame?",
@@ -251,7 +268,7 @@ public class CutsceneManager : MonoBehaviour
         senenLines = new string[] {
         "Obviously not me!"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, false);
 
         dimaLines = new string[] {
         "And not me!",
@@ -267,27 +284,210 @@ public class CutsceneManager : MonoBehaviour
         "...!",
         };
         dialogueManager.NewDialog(daniLines, 2, true);
-    }
-    public void PlayCutscene4AfterExplosion()
-    {
+
         senenLines = new string[] {
-        "Great… What am I supposed to do now?"
+        "What am I supposed to do now?"
         };
         dialogueManager.NewDialog(senenLines, null, false);
     }
     public void PlayCutscene4Mario()
     {
         senenLines = new string[] {
-        "Listen. I’m sorry. I think we all kinda… overwhelmed"
+        "Listen. I’m sorry. I think we're all kinda… overwhelmed"
         };
-        dialogueManager.NewDialog(senenLines, null, false);
+        dialogueManager.NewDialog(senenLines, 3, false);
 
-        //
+        marioLines = new string[] {
+        "Yes. Sorry. I didn't want to be rude"
+        };
+        dialogueManager.NewDialog(marioLines, true);
 
         senenLines = new string[] {
         "It’s not your fault",
         "Also, I started it, so…"
         };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "Hey, cheer up. No one has died yet",
+        "Let's continue working. We still can do it"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+    }
+
+    public void PlayCutscene4Alba()
+    {
+        senenLines = new string[] {
+        "Hey, Alba?"
+        };
+        dialogueManager.NewDialog(senenLines, 1, false);
+
+        marioLines = new string[] {
+        "Hey…"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "How are you?"
+        };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "It’s fine. I’m just kinda tired and sad that we didn’t make it as well as we could"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "Well, Dmitrii was actually right. We still have time.",
+        "Not so much, but we have it."
+        };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "Yes, you’re right. Let’s try our best!"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+    }
+
+    public void PlayCutscene4Andrey()
+    {
+        senenLines = new string[] {
+        "Andrey?"
+        };
+        dialogueManager.NewDialog(senenLines, 5, false);
+
+        marioLines = new string[] {
+        "Hello. I’m sorry for misunderstanding"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "Ah, no. We all just didn’t really listen to each other.",
+        "But do you still want to finish?"
+        };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "Oh, yes!"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "Then let’s do it!",
+        };
+        dialogueManager.NewDialog(senenLines, false);
+    }
+
+    public void PlayCutscene4Alyta()
+    {
+        senenLines = new string[] {
+        "Hi. How are you?"
+        };
+        dialogueManager.NewDialog(senenLines, 6, false);
+
+        marioLines = new string[] {
+        "Good. A bit disappointed. Not in you, guys, but in a… work process."
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "I guess, I understand."
+        };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "But I think it’s fine.",
+        "After all, we joined it for experience",
+        "And I think it’s a good one."
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "Does it mean, that you’re ready to work?"
+        };
+        dialogueManager.NewDialog(senenLines, false);
+
+        marioLines = new string[] {
+        "Oh, yes. More obstacles – more fun. Let’s go!"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+    }
+
+    public void PlayCutscene4Dmitrii()
+    {
+        marioLines = new string[] {
+        "I know, what are you going to say. I’m fine. But honestly, I still want my OJ."
+        };
+        dialogueManager.NewDialog(marioLines, 0, true);
+
+        senenLines = new string[] {
+        "..."
+        };
+        dialogueManager.NewDialog(senenLines, false);
+    }
+
+    public void PlayCutscene4Sam()
+    {
+        senenLines = new string[] {
+        "Hey Sam..."
+        };
+        dialogueManager.NewDialog(senenLines, 4, false);
+
+        marioLines = new string[] {
+        "Awfreiaunfg"
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "Absolutely agree."
+        };
+        dialogueManager.NewDialog(senenLines, false);
+    }
+
+    public void PlayCutscene4Dani()
+    {
+        senenLines = new string[] {
+        "..."
+        };
+        dialogueManager.NewDialog(senenLines, 2, false);
+
+        marioLines = new string[] {
+        "..."
+        };
+        dialogueManager.NewDialog(marioLines, true);
+
+        senenLines = new string[] {
+        "..."
+        };
+        dialogueManager.NewDialog(senenLines, false);
+    }
+
+    public void PlayCutscene5()
+    {
+        dialogueManager.NewDialog("It’s time to check the result.", null, false);
+    }
+
+    public void PlayCutscene6()
+    {
+        interactionsManager.SetState(5);
+
+        senenLines = new string[] {
+        "We actually did a great job. I have to tell everyone that we can send it.",
+        "Guys...",
+        "...",
+        "Oh...",
+        "They have all fallen asleep...",
+        "Oh no! The time! I have to send the project!"
+        };
         dialogueManager.NewDialog(senenLines, null, false);
+    }
+
+    public void PlayCutscene2Wait()
+    {
+        dialogueManager.NewDialog("I should check how everyone's doing before playing...", null, false);
+    }
+    public void PlayCutscene4Wait()
+    {
+        dialogueManager.NewDialog("This is a mess, everyone needs to continue working or there'll be no game at all!!!", null, false);
     }
 }

@@ -27,11 +27,16 @@ public class Template_buggy : MonoBehaviour
 
     float add = 0f;
     float add_t = 0f;
+
+    //camera stuff
+    Camera cam;
+    int shake_lock;
     void Start()
     {
         //assigning variables
         origin_t = GetComponent<Transform>();
         origin_r = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
         //origin_c = GetComponent<BoxCollider2D>();
     }
     void Update()
@@ -86,6 +91,11 @@ public class Template_buggy : MonoBehaviour
             } else {
                 if(cd2 == 0){
                     cd2 = 1;
+                    if(shake_lock == 0){
+                        StartCoroutine(Camera_shake.ShakeCamera(cam, 0.2f, 0.3f));
+                        shake_lock += 1;
+                    }
+                    
                 }
             }
             if(cd2 == 1){
@@ -99,7 +109,6 @@ public class Template_buggy : MonoBehaviour
         }
 
     }
-
     void Launch()
     {
         //here we will write the code which will propulse the player to the screen
@@ -115,6 +124,7 @@ public class Template_buggy : MonoBehaviour
             add = 0f;
             add_t = 0f;
             cur_timer2 = 1f;
+            shake_lock = 0;
 
             //we have to refactor everything to normal
             dumb_ah.GetComponent<Transform>().localScale = new Vector3(1f,1f,dumb_ah.GetComponent<Transform>().localScale.z);

@@ -47,9 +47,13 @@ public class DialogManager : MonoBehaviour
 
         string[] dialogs = new string[]{ "Lorem Ipsum, ladies and gentlemen", "Orange juice is the best" };
         if (Input.GetKey(interactKey) && !isActiveDialog) { 
-            NewDialog(dialogs, 0, true);
+            NewDialog(dialogs, 0, true); //Dmitrii
             dialogs = new string[] { "Original Jamaican!?", "No way" };
-            NewDialog(dialogs, 4, true);
+            NewDialog(dialogs, 4, true); //Sam
+            dialogs = new string[] { "You are at it again! Get back to work!", "OJ means original... jam... game!" };
+            NewDialog(dialogs, 6, true); //Alyta
+            dialogs = new string[] { "Alyta is right we should merge back to work", "Let's commit to this!" };
+            NewDialog(dialogs, 3, true); //Mario
             StartCoroutine(ConversationManager());
         }
     }

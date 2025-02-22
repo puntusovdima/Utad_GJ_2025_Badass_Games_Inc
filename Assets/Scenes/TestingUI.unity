@@ -242,6 +242,7 @@ MonoBehaviour:
   dialogBox: {fileID: 217032553}
   taskBox: {fileID: 594632617}
   dialogText: {fileID: 809505234}
+  audio: {fileID: 0}
   dialogSpeaker: {fileID: 1704573007}
   dialogPlayer: {fileID: 946422402}
   characterSprites:
@@ -260,6 +261,9 @@ MonoBehaviour:
   - Sam
   - Andrey
   - Alyta
+  alphaManager:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 1, b: 1, a: 0}
   interactKey: 101
   normalSpeed: 0.03
   quickSpeed: 0
@@ -371,7 +375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &217032554
 RectTransform:
   m_ObjectHideFlags: 0

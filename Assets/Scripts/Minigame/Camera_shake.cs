@@ -10,7 +10,6 @@ public class Camera_shake : MonoBehaviour
 
         while (elapsed < duration)
         {
-            Debug.Log("a");
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
             

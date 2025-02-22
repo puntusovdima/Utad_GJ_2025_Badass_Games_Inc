@@ -25,6 +25,9 @@ public class Template_buggy : MonoBehaviour
     int cd2 = 0;
     int locka = 0;
 
+    float timer3 = 0.2f;
+    float cur_timer3 = 0.2f;
+
     float add = 0f;
     float add_t = 0f;
 
@@ -89,13 +92,13 @@ public class Template_buggy : MonoBehaviour
                 add = (add - 0.2f) * 1.03f;
                 add_t = add * 0.05f;
             } else {
+                Debug.Log("a");
                 if(cd2 == 0){
                     cd2 = 1;
                     if(shake_lock == 0){
                         StartCoroutine(Camera_shake.ShakeCamera(cam, 0.2f, 0.3f));
-                        shake_lock += 1;
+                        shake_lock = 1;
                     }
-                    
                 }
             }
             if(cd2 == 1){
@@ -106,6 +109,15 @@ public class Template_buggy : MonoBehaviour
                     dumb_ah.GetComponent<Rigidbody2D>().gravityScale = 1f;
                 }
             }
+            if(shake_lock == 2){
+                cur_timer3 -= Time.deltaTime;
+                if(cur_timer3 <= 0){
+                    cur_timer3 = timer3;
+                    shake_lock = 3;
+                    StartCoroutine(Camera_shake.ShakeCamera(cam, 0.2f, 0.3f));
+                }
+            }
+
         }
 
     }
@@ -124,7 +136,15 @@ public class Template_buggy : MonoBehaviour
             add = 0f;
             add_t = 0f;
             cur_timer2 = 1f;
-            shake_lock = 0;
+            cd2 = 0;
+
+            if(shake_lock == 1){
+                shake_lock = 2;
+            }
+
+            if(shake_lock == 3){
+                shake_lock = 2;
+            }
 
             //we have to refactor everything to normal
             dumb_ah.GetComponent<Transform>().localScale = new Vector3(1f,1f,dumb_ah.GetComponent<Transform>().localScale.z);

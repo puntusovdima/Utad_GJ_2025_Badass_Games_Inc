@@ -37,7 +37,7 @@ public class DialogManager : MonoBehaviour
     private void Start()
     {
         speed = normalSpeed;
-        StartCoroutine(ConversationManager());
+        //StartCoroutine(ConveresationManager());
     }
 
     void Update()
@@ -45,8 +45,13 @@ public class DialogManager : MonoBehaviour
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
 
-        string[] dialogs = new string[]{ "a", "b" };
-        if (Input.GetKey(interactKey) && !isActiveDialog) NewDialog(dialogs, 0, false);
+        string[] dialogs = new string[]{ "Lorem Ipsum, ladies and gentlemen", "Orange juice is the best" };
+        if (Input.GetKey(interactKey) && !isActiveDialog) { 
+            NewDialog(dialogs, 0, true);
+            dialogs = new string[] { "Original Jamaican!?", "No way" };
+            NewDialog(dialogs, 4, true);
+            StartCoroutine(ConversationManager());
+        }
     }
 
     /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
@@ -72,7 +77,8 @@ public class DialogManager : MonoBehaviour
             dialogCharacterSpritesQueue.Add(npcSprite);
             isNpcTalkingBoolQueue.Add(npcTalking);
         }
-        lastSpeaker = npcSprite;
+        //lastSpeaker = npcSprite;
+        //Debug.Log("Last speaker is " + characterSprites.IndexOf(lastSpeaker));
     }
 
     public void ResetDialogAnimators()
@@ -121,6 +127,8 @@ public class DialogManager : MonoBehaviour
                     string npcName = "";
                     if (npcSprite != null) npcName = npcNames[characterSprites.IndexOf(npcSprite)];
                     dialogSpeaker.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = npcName;
+                    lastSpeaker = npcSprite;
+                    Debug.Log("Last speaker is " + characterSprites.IndexOf(lastSpeaker));
 
                     if (isNpcTalking)
                     {
@@ -153,7 +161,7 @@ public class DialogManager : MonoBehaviour
         {
 
             dialogText.text = dialogText.text + c;
-            // playCharSound;
+            AudioManager.instance.PlayBlablaSound(characterSprites.IndexOf(lastSpeaker));
 
             yield return new WaitForSecondsRealtime(speed);
         }

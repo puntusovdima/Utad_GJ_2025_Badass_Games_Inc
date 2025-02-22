@@ -7,6 +7,8 @@ public class DisableCinemachineVirtCam : StateMachineBehaviour
 {
     public CinemachineVirtualCamera vcam;
     public PlayerMovement playerMovement;
+    public Vector3 cmPosition = new Vector3(-6.2f, -0.15f, -10);
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -14,6 +16,8 @@ public class DisableCinemachineVirtCam : StateMachineBehaviour
         playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
         playerMovement.enabled = false;
         vcam.enabled = false;
+        Camera.main.transform.position = cmPosition;
+        vcam.transform.position = cmPosition;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

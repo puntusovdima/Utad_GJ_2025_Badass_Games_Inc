@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -1009296128, guid: 14c186a318e99ca47878020f3f6105de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 936bf1bb8a9f73f41a7fd0c873e9a028, type: 2}
   sm: {fileID: 0}
   speed: 7
+  canMove: 1
 --- !u!50 &3728998684346493034
 Rigidbody2D:
   serializedVersion: 4
@@ -197,8 +198,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.1280483}
+  m_Size: {x: 0.8595432, y: 1.7439034}
   m_Direction: 0
 --- !u!114 &4682031197826614940
 MonoBehaviour:
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionAnchor: {fileID: 5126467390371522430}
-  anchorSizeX: 1
+  anchorSizeX: 3.5
   anchorSizeY: 2
   showGizmos: 1
   interactLayer:
@@ -266,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 8950242582397529666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

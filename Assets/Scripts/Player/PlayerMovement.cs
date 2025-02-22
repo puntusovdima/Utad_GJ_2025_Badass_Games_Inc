@@ -15,6 +15,20 @@ public class PlayerMovement : MonoBehaviour
         sm = GameObject.FindGameObjectWithTag("StateManager").GetComponent<StateManager>();
     }
 
+    public void Update()
+    {
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            GetComponent<Animator>().SetBool("moving", true);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("moving", false);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().flipX = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!canMove || sm.state == 0) return;

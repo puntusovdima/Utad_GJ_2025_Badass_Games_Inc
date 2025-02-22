@@ -10,7 +10,7 @@ public class InteractButton : MonoBehaviour
 
     private void Start()
     {
-        interactButton = GameObject.Find("E_button");
+        interactButton = transform.GetChild(0).gameObject;
         sr = interactButton.GetComponent<SpriteRenderer>();
         // sr = GetComponent<SpriteRenderer>();
     }

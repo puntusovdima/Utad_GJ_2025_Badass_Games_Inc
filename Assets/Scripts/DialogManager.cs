@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +14,9 @@ public class DialogManager : MonoBehaviour
     public Image dialogSpeaker;
     public Image dialogPlayer;
 
-    [Header("Sprites")]
-    public Sprite[] characterSprites;
+    [Header("Lists")]
+    public List<Sprite> characterSprites;
+    public string[] npcNames;
 
     [Header("Modifiers")]
     public KeyCode interactKey = KeyCode.E;
@@ -42,11 +44,11 @@ public class DialogManager : MonoBehaviour
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
     }
 
-    /// <param name="spriteSpriteIndx">int [0, 6]</param>
+    /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
     public void NewDialog(string msg, int spriteSpriteIndx, bool npcTalking)
     { NewDialog(msg, characterSprites[spriteSpriteIndx], npcTalking); }
 
-    /// <param name="spriteSpriteIndx">int [0, 6]</param>
+    /// <param name="spriteSpriteIndx">0: Dmitrii -- 1: Alba -- 2: Dani -- 3: Mario -- 4: Sam -- 5: Andrey -- 6: Alyta</param>
     public void NewDialog(string[] msg, int spriteSpriteIndx, bool npcTalking)
     { NewDialog(msg, characterSprites[spriteSpriteIndx], npcTalking); }
 
@@ -69,8 +71,8 @@ public class DialogManager : MonoBehaviour
 
     public void ResetDialogAnimators()
     {
-        dialogPlayer.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-        dialogSpeaker.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        dialogPlayer.GetComponent<Animator>().SetBool("isFocused", false);
+        dialogSpeaker.GetComponent<Animator>().SetBool("isFocused", false);
         dialogPlayer.GetComponent<Animator>().SetTrigger("Reset");
         dialogSpeaker.GetComponent<Animator>().SetTrigger("Reset");
     }
@@ -104,8 +106,11 @@ public class DialogManager : MonoBehaviour
                     string line = dialogLinesQueue[0];
                     Sprite npcSprite = dialogCharacterSpritesQueue[0];
                     bool isNpcTalking = isNpcTalkingBoolQueue[0];
+                    string npcName = npcNames[characterSprites.IndexOf(npcSprite)];
 
                     dialogSpeaker.sprite = npcSprite;
+                    dialogSpeaker.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = npcName;
+
                     if (isNpcTalking)
                     {
                         dialogPlayer.GetComponent<Animator>().SetBool("isFocused", false);

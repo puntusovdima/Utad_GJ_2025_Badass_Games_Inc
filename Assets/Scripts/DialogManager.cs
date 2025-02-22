@@ -40,15 +40,6 @@ public class DialogManager : MonoBehaviour
     {
         if (Input.GetKey(interactKey) && isActiveDialog) speed = quickSpeed;
         else if (!Input.GetKey(interactKey) && isActiveDialog) speed = normalSpeed;
-
-        if (Input.GetKey(interactKey) && !isActiveDialog)
-        {
-
-            NewDialog("Hola 1", characterSprites[0], false);
-            NewDialog("Hola 2", true);
-            NewDialog("Que tal? 1", false);
-            NewDialog("Bien 2", true);
-        }
     }
 
     /// <param name="spriteSpriteIndx">int [0, 6]</param>
@@ -103,7 +94,7 @@ public class DialogManager : MonoBehaviour
                 dialogBox.SetActive(false);
                 ResetDialogAnimators();
                 taskBox.GetComponent<Animator>().SetBool("isShown", true);
-                Time.timeScale = 0;
+                Time.timeScale = 1;
             }
 
             if (isConversation)

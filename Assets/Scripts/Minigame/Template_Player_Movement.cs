@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Template_Player_Movement : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Template_Player_Movement : MonoBehaviour
     BoxCollider2D player_c;
     Transform player_ground;
     Transform player_axis;
+    [SerializeField] TextMeshProUGUI text;
 
     //camera
     Camera cam;
@@ -122,9 +124,8 @@ public class Template_Player_Movement : MonoBehaviour
         if(cur_timer <= 0){
             cur_timer = timer;
             time -= 1;
-            Debug.Log(time);
+            text.SetText(time.ToString());
         }
-
         propulse = false;
         if(time <= 0 && no == 0){
             propulse = true;

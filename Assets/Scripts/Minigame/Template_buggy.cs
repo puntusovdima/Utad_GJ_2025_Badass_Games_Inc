@@ -62,7 +62,6 @@ public class Template_buggy : MonoBehaviour
 
         Collider2D[] hit = Physics2D.OverlapCircleAll(origin_t.position,1.4f);
         what = GameObject.Find("Template_player").GetComponent<Template_Player_Movement>().propulse;
-        Debug.Log(what);
         if(what == true){
             Debug.Log("a");
             hit[0] = GameObject.Find("Template_player").GetComponent<Collider2D>();

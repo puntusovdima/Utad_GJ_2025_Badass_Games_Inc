@@ -70,6 +70,7 @@ public class Template_buggy : MonoBehaviour
             if(player != null){
                 player.gameObject.GetComponent<Rigidbody2D>().gravityScale = 1f;
                 player.gameObject.GetComponent<Renderer>().enabled = true;
+                locka = 0;
             }
         }
 
@@ -84,6 +85,7 @@ public class Template_buggy : MonoBehaviour
                 add_t = add * 0.05f;
             } else {
                 if(cd2 == 0){
+                    Debug.Log("a");
                     cd2 = 1;
                 }
             }
@@ -91,7 +93,7 @@ public class Template_buggy : MonoBehaviour
                 cur_timer2 -= Time.deltaTime;
                 if(cur_timer2 <= 0){
                     cur_timer2 = timer2;
-                    cd = 0;
+                    cd2 = 0;
                     dumb_ah.GetComponent<Rigidbody2D>().gravityScale = 1f;
                 }
             }
@@ -105,9 +107,19 @@ public class Template_buggy : MonoBehaviour
         //with a funny breaking animation
         
         dumb_ah = GameObject.Find("Sprite_to_screen");
+        
         if(locka == 0){
             dumb_ah.GetComponent<Transform>().position = player.GetComponent<Transform>().position;
+            dumb_ah.GetComponent<Rigidbody2D>().gravityScale = 0f;
+            dumb_ah.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,0f);
             locka += 1;
+            add = 0f;
+            add_t = 0f;
+            cur_timer2 = 1f;
+
+            //we have to refactor everything to normal
+            dumb_ah.GetComponent<Transform>().localScale = new Vector3(1f,1f,dumb_ah.GetComponent<Transform>().localScale.z);
+            dumb_ah.GetComponent<Rigidbody2D>().MoveRotation(0f);
         }
         dumb_ah.GetComponent<Renderer>().enabled = true;
     }

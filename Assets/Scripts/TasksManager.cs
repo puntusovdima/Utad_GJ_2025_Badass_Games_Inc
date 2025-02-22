@@ -19,7 +19,7 @@ public class TaskManager : MonoBehaviour
     }
 
 
-    public void EnQuitTasks()
+    public void EndQuitTasks()
     {
         anim.SetTrigger("Quit");
     }
@@ -29,7 +29,11 @@ public class TaskManager : MonoBehaviour
         subtask.text = newSubtask;
     }
 
-    public IEnumerator UpdateSubtask(string newSubtask)
+    public void UpdateSubtask(string newSubtask)
+    {
+        StartCoroutine(UpdateSubtaskCoroutine(newSubtask));
+    }
+    public IEnumerator UpdateSubtaskCoroutine(string newSubtask)
     {
         float seconds = 90f;
         seconds = seconds / 120;

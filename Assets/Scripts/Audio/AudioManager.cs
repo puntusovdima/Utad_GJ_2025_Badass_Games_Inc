@@ -55,12 +55,9 @@ public class AudioManager : MonoBehaviour
     {
         introSound.Play();
         Debug.Log("Logo appears");
-        await Task.Delay(11000);
+        await Task.Delay(7000);
         Debug.Log("Something is wrong ! ");
         somethingWentWrongAudio.Play();
-        await Task.Delay(3500);
-        Debug.Log("The protagonist appears and starts speaking... ");
-        blablaSounds[0].Play();
     }
 
     public void PlayBlablaSound(int speakerIndex)

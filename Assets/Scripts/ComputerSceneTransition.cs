@@ -7,6 +7,7 @@ public class ComputerSceneTransition : MonoBehaviour
 {
     ComputerSceneTransition instance;
     Camera cam;
+    public CinemachineVirtualCamera virtualCamera;
     PlayerMovement playerMovement;
     [Tooltip("Probably the same as the location of camera on start")]
     [SerializeField] Vector3 zoomOutTargetPosition;
@@ -16,7 +17,7 @@ public class ComputerSceneTransition : MonoBehaviour
     [SerializeField] Transform zoomTarget;
     [Header("Animation Parameters")]
     [SerializeField] Animator fadeInAnim;
-    bool zoom;
+    public bool zoom;
     Vector3 targetPosition;
     float targetCameraSize;
 
@@ -27,20 +28,16 @@ public class ComputerSceneTransition : MonoBehaviour
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         if (instance == null) instance = this;
 
-        if (StateManager.instance.miniGameCompleteCount > 0) {
-            ZoomOut();
-            //await Task.Delay(500);
-            Debug.Log("TELEPORT");
-            playerMovement.transform.position = new Vector3(68f, -3.06f, 0);
-        }
+        if (StateManager.instance.miniGameCompleteCount > 0) ZoomOut();
     }
     private void Update()
     {
         if (zoom) { 
-            transform.position = Vector3.Lerp(transform.position, targetPosition, zoomSpeed);
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, zoomSpeed);
+            //transform.position = Vector3.Lerp(transform.position, targetPosition, zoomSpeed);
+            //cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetCameraSize, zoomSpeed);
+            virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(virtualCamera.m_Lens.OrthographicSize, targetCameraSize, zoomSpeed);
 
-            if (Vector3.Distance(transform.position, targetPosition) <= 0.1f) { 
+            if (Mathf.Abs(virtualCamera.m_Lens.OrthographicSize - targetCameraSize) <= 0.1f) { 
                 zoom = false;
                 playerMovement.canMove = true;
                 GetComponent<CinemachineBrain>().enabled = true;
@@ -52,10 +49,8 @@ public class ComputerSceneTransition : MonoBehaviour
 
     public async void ZoomIn(int transitionSceneIndex)
     {
-        GetComponent<CinemachineBrain>().enabled = false;
         playerMovement.canMove = false;
         zoom = true;
-        targetPosition = zoomTarget.position - transform.forward;
         targetCameraSize = 1.8f;
         await Task.Delay(fadeInStart);
         fadeInAnim.SetTrigger("FadeIn");
@@ -64,13 +59,10 @@ public class ComputerSceneTransition : MonoBehaviour
     }
     public void ZoomOut()
     {
-        GetComponent<CinemachineBrain>().enabled = false;
-        playerMovement.transform.position = new Vector3(4.47f, -2.95f, 0);
+        playerMovement.transform.position = new Vector3(68f, -3.06f, 0);
         playerMovement.canMove = false;
-        cam.orthographicSize = 1.8f;
-        transform.position = zoomTarget.position - transform.forward;
-        targetPosition = zoomOutTargetPosition;
-        targetCameraSize = 3.27f;
+        virtualCamera.m_Lens.OrthographicSize = 1.8f;
+        targetCameraSize = 2.8f;
         fadeInAnim.SetTrigger("FadeOut");
         zoom = true;
     }

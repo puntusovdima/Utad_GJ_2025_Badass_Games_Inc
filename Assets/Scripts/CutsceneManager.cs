@@ -61,7 +61,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void PlayCutscene1()
     {
-        dialogueManager.NewDialog("Hey, guys… we have the problem…", null, false);
+        dialogueManager.NewDialog("Hey, guys… we have a problem…", null, false);
 
         alytaLines = new string[] {
         "What’s happened?"
@@ -216,14 +216,9 @@ public class CutsceneManager : MonoBehaviour
         interactionsManager.SetState(3);
         senenLines = new string[] {
         "Jesus Christ! This is horrible! What did these guys do?!",
-        "I have to talk seriously with them"
-        };
-        dialogueManager.NewDialog(senenLines, null, false);
-    }
-
-    public void PlayCutscene4Library()
-    {
-        senenLines = new string[] {
+        "The game just cuts itself mid-game?",
+        "I have to talk seriously with them.",
+        "...",
         "Guys. We have to talk",
         "What’s going on?"
         };

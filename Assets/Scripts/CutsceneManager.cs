@@ -54,7 +54,7 @@ public class CutsceneManager : MonoBehaviour
     public void PlayCutsceneIntro()
     {
         senenLines = new string[] {
-        "Wait! Wait! What’s going on here?!",
+        "Wait! Wait! What’s going on here?!    (Press 'E' to continue)",
         "It's not supposed to be like this! We didn’t even finish the core mechanics yet! Why has the intro already started?!",
         "It’s a disaster. We must step on the gas!",
         "We are absolutely out of time!!!",

@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public class FinalPcUi : MonoBehaviour
 {
@@ -92,6 +93,6 @@ public class FinalPcUi : MonoBehaviour
         Debug.Log("Congratulations! You passed the game!");
         await Task.Delay(3000);
         gameObject.SetActive(false);
-        CutsceneManager.instance.PlayCutscene6();
+        SceneManager.LoadScene(4);
     }
 }

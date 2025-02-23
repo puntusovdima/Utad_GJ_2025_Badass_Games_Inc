@@ -80,12 +80,12 @@ public class FinalPcUi : MonoBehaviour
 
     public async void SendGame()
     {
-        laptopImage.sprite = sprites[3];
+        laptopImage.sprite = sprites[4];
         anim.SetTrigger(AlmostMidnight);
         SendButtonImage.sprite = SendButtonSprites[2];
         SendButton.SetActive(false);
         // call the finish game logic here
-        await Task.Delay(8000);
+        await Task.Delay(10000);
         FinishTheGame();
     }
 

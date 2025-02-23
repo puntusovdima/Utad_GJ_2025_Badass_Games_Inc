@@ -1,12 +1,15 @@
 using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D _rb;
-    [SerializeField] public AnimatorController animationController;
-    [SerializeField] public AnimatorController animatorController;
+    //[SerializeField] public AnimatorController animationController;
+    //[SerializeField] public AnimatorController animatorController;
+
+    public Animator animAnim;
+    public Animator animMove;
+
     public InteractionsManager interactionsManager;
     public StateManager sm;
     public float speed = 5f;

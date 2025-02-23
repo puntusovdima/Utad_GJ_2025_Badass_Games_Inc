@@ -37,7 +37,7 @@ public class DisableCinemachineVirtCam : StateMachineBehaviour
         playerMovement.enabled = true;
         interactionsManager.Begining();
         // animator.enabled = false;
-        animator.runtimeAnimatorController = playerMovement.animatorController;
+        animator.runtimeAnimatorController = playerMovement.animMove.runtimeAnimatorController;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

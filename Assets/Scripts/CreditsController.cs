@@ -17,5 +17,7 @@ public class CreditsController : MonoBehaviour
         await Task.Delay(6000);
         authorsCredits.SetActive(false);
         soundsCredits.SetActive(true);
+        await Task.Delay(6000);
+        Application.Quit();
     }
 }

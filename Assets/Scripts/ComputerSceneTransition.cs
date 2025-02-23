@@ -8,6 +8,7 @@ public class ComputerSceneTransition : MonoBehaviour
     ComputerSceneTransition instance;
     Camera cam;
     public CinemachineVirtualCamera virtualCamera;
+    public TaskManager taskManager;
     PlayerMovement playerMovement;
     [Tooltip("Probably the same as the location of camera on start")]
     [SerializeField] Vector3 zoomOutTargetPosition;
@@ -59,6 +60,7 @@ public class ComputerSceneTransition : MonoBehaviour
     }
     public void ZoomOut()
     {
+        taskManager.NewTask("");
         playerMovement.transform.position = new Vector3(68f, -3.06f, 0);
         playerMovement.canMove = false;
         virtualCamera.m_Lens.OrthographicSize = 1.8f;

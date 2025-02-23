@@ -7,6 +7,7 @@ using UnityEngine;
 public class InteractionsManager : MonoBehaviour
 {
     public DialogManager DialogManager;
+    public FinalPcUi PcManager;
     public CutsceneManager CutsceneManager;
 
     string[] characterNames = { "Dmitrii", "Alba", "Dani", "Mario", "Sam", "Andrey", "Alyta" };
@@ -14,7 +15,11 @@ public class InteractionsManager : MonoBehaviour
 
     bool canComputer = false;
     bool justStarted = false;
-    //string lastHitName = null;
+    
+    float lastInteractedWithNpc = 0;
+    float timeBetweenNpcInteractions = 0.6f;
+    string lastNpcInteracted = null;
+
 
     private void Start()
     {
@@ -39,12 +44,17 @@ public class InteractionsManager : MonoBehaviour
                 CutsceneManager.PlayCutscene2EndMonologue();
                 canComputer = true;
             }
+            else if (stateManager.state < 4 && stateManager.CheckIfSpokenWithAll() && !canComputer)
+            {
+                CutsceneManager.PlayCutscene5();
+                canComputer = true;
+            }
         }
     }
 
     public void Manager(string hitName)
     {
-        if (Input.GetKeyDown(KeyCode.E) && !DialogManager.dialogBox.activeSelf)
+        if (Input.GetKeyDown(KeyCode.E) && !DialogManager.dialogBox.activeSelf && !Camera.main.GetComponent<ComputerSceneTransition>().zoom)
         {
             print(hitName);
 
@@ -55,37 +65,43 @@ public class InteractionsManager : MonoBehaviour
 
     public void DialogController(string npcName)
     {
-        int i = 0;
-        foreach (string name in characterNames)
+        if (lastNpcInteracted != npcName || Time.time > lastInteractedWithNpc + timeBetweenNpcInteractions)
         {
-            if (npcName == name) break;
-            else i++;
-        }
+            lastInteractedWithNpc = Time.time;
+            lastNpcInteracted = npcName;
 
-        switch (npcName)
-        {
-            case "Dmitrii":
-                Dmitrii(i);
-                break;
-            case "Alba":
-                Alba(i);
-                break;
-            case "Dani":
-                Dani(i);
-                break;
-            case "Mario":
-                Mario(i);
-                break;
-            case "Sam":
-                Sam(i);
-                break;
-            case "Andrey":
-                Andrey(i);
-                break;
-            case "Alyta":
-                Alyta(i);
-                break;
+            int i = 0;
+            foreach (string name in characterNames)
+            {
+                if (npcName == name) break;
+                else i++;
+            }
 
+            switch (npcName)
+            {
+                case "Dmitrii":
+                    Dmitrii(i);
+                    break;
+                case "Alba":
+                    Alba(i);
+                    break;
+                case "Dani":
+                    Dani(i);
+                    break;
+                case "Mario":
+                    Mario(i);
+                    break;
+                case "Sam":
+                    Sam(i);
+                    break;
+                case "Andrey":
+                    Andrey(i);
+                    break;
+                case "Alyta":
+                    Alyta(i);
+                    break;
+
+            }
         }
     }
 

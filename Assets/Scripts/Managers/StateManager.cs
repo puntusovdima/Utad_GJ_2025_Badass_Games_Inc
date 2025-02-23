@@ -28,7 +28,9 @@ public class StateManager : MonoBehaviour
 
    private void Start()
    {
-        InvokeRepeating("UpdateStateInt", 0, 0.1f);
+        //InvokeRepeating("UpdateStateInt", 0, 0.1f);
+
+        //print(gameObject);
    }
 
     public void CompleteMiniGame()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Template_Player_Movement : MonoBehaviour
@@ -29,6 +30,8 @@ public class Template_Player_Movement : MonoBehaviour
     float time = 20f;
     float timer = 1f;
     float cur_timer = 1f;
+
+    public bool diable = false;
     public bool propulse = false;
     int no = 0;
     void Start()
@@ -126,9 +129,19 @@ public class Template_Player_Movement : MonoBehaviour
         }
         propulse = false;
         if(time <= 0 && no == 0){
-            propulse = true;
+            if (!diable) propulse = true;
+            else StartCoroutine(Die());
             no = 1;
         }
+    }
+    
+    public IEnumerator Die()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Animator>().SetTrigger("Die");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnDrawGizmos(){

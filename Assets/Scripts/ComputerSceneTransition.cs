@@ -50,16 +50,18 @@ public class ComputerSceneTransition : MonoBehaviour
 
     public async void ZoomIn(int transitionSceneIndex)
     {
+        AudioManager.instance.StopStepSound();
         playerMovement.canMove = false;
         zoom = true;
         targetCameraSize = 1.8f;
         await Task.Delay(fadeInStart);
         fadeInAnim.SetTrigger("FadeIn");
-        await Task.Delay(5000);
+        await Task.Delay(6650);
         TransitionToNextScene(transitionSceneIndex);
     }
     public void ZoomOut()
     {
+        AudioManager.instance.PlayComputerShutDownSound();
         taskManager.NewTask("");
         playerMovement.transform.position = new Vector3(68f, -3.06f, 0);
         playerMovement.canMove = false;

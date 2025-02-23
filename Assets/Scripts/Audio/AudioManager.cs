@@ -40,6 +40,11 @@ public class AudioManager : MonoBehaviour
         //PlayComputerStartUpSound();
         //PlayComputerShutDownSound();
     }
+    private void Update()
+    {
+        //if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) StopStepSound();
+        //if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) StopStepSound();
+    }
 
 
     #region helper functions
@@ -105,6 +110,7 @@ public class AudioManager : MonoBehaviour
     {
         if (!playingStepSounds) return;
         playingStepSounds = false;
+        stepSounds[randomIndex].Stop();
         CancelInvoke("StepSoundRepetition");
     }
     public void PlayStepSound()
@@ -116,9 +122,13 @@ public class AudioManager : MonoBehaviour
     void StepSoundRepetition()
     {
         //Debug.Log("Play sound step " + randomIndex);
-        randomIndex = Random.Range(0, stepSounds.Count);
-        stepSounds[randomIndex].pitch = GetRandomPitch();
-        stepSounds[randomIndex].Play();
+        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)
+            | Input.GetKey(KeyCode.LeftArrow) | Input.GetKey(KeyCode.RightArrow)) {
+
+            randomIndex = Random.Range(0, stepSounds.Count);
+            stepSounds[randomIndex].pitch = GetRandomPitch();
+            stepSounds[randomIndex].Play();
+        }
     }
     #endregion
 }

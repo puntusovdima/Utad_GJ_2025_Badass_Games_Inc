@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
     [SerializeField] float stepSoundRate;
+    bool playingStepSounds;
     int randomIndex = 0;
     [Header("Sounds")]
     [SerializeField] AudioSource introSound;
@@ -17,13 +18,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioSource interactSound;
     [SerializeField] AudioSource pressedButtonSound;
     [SerializeField] List<AudioSource> computerSounds = new List<AudioSource>();
+    [SerializeField] AudioSource blablaSource;
+    [SerializeField] List<BlablaConfig> blablaConfigs = new List<BlablaConfig>();
+    BlablaConfig blablaConfig;
 
     private void Awake()
     {
         if (instance == null) instance = this;
 
         //A List of public methods:
-        PlayIntroSound();
+        //PlayIntroSound();
         //PlayStepSound();
         //StopStepSound();
 
@@ -35,6 +39,11 @@ public class AudioManager : MonoBehaviour
 
         //PlayComputerStartUpSound();
         //PlayComputerShutDownSound();
+    }
+    private void Update()
+    {
+        //if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) StopStepSound();
+        //if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow)) StopStepSound();
     }
 
 
@@ -51,24 +60,19 @@ public class AudioManager : MonoBehaviour
     {
         introSound.Play();
         Debug.Log("Logo appears");
-        await Task.Delay(11000);
+        await Task.Delay(5500);
         Debug.Log("Something is wrong ! ");
+        introSound.Stop();
         somethingWentWrongAudio.Play();
-        await Task.Delay(3500);
-        Debug.Log("The protagonist appears and starts speaking... ");
-        blablaSounds[0].Play();
     }
 
-    public void PlayBlaBlaMale()
+    public void PlayBlablaSound(int speakerIndex)
     {
-        blablaSounds[0].pitch = GetRandomPitch();
-        blablaSounds[0].Play();
-    }
-    public void PlayBlaBlaFemale()
-    {
-        blablaSounds[1].pitch = GetRandomPitch();
-        blablaSounds[1].Play();
-
+        blablaSource.Stop();
+        blablaConfig = blablaConfigs[speakerIndex];
+        blablaSource.clip = blablaConfig.GetRandomClip();
+        blablaSource.pitch = blablaConfig.GetRandomPitch();
+        blablaSource.PlayOneShot(blablaSource.clip);
     }
     public void PlayJumpSound()
     {
@@ -105,18 +109,27 @@ public class AudioManager : MonoBehaviour
     #region step sounds
     public void StopStepSound()
     {
+        if (!playingStepSounds) return;
+        playingStepSounds = false;
+        stepSounds[randomIndex].Stop();
         CancelInvoke("StepSoundRepetition");
     }
     public void PlayStepSound()
     {
+        if (playingStepSounds) return;
+        playingStepSounds = true;
         InvokeRepeating("StepSoundRepetition", 0f, stepSoundRate);
     }
     void StepSoundRepetition()
     {
-        Debug.Log("Play sound step " + randomIndex);
-        randomIndex = Random.Range(0, stepSounds.Count);
-        stepSounds[randomIndex].pitch = GetRandomPitch();
-        stepSounds[randomIndex].Play();
+        //Debug.Log("Play sound step " + randomIndex);
+        if (Input.GetKey(KeyCode.A) | Input.GetKey(KeyCode.D)
+            | Input.GetKey(KeyCode.LeftArrow) | Input.GetKey(KeyCode.RightArrow)) {
+
+            randomIndex = Random.Range(0, stepSounds.Count);
+            stepSounds[randomIndex].pitch = GetRandomPitch();
+            stepSounds[randomIndex].Play();
+        }
     }
     #endregion
 }

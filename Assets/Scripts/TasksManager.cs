@@ -5,19 +5,20 @@ using UnityEngine;
 public class TaskManager : MonoBehaviour
 {
     [Header("References")]
+    public DialogManager DialogManager;
     public TMPro.TextMeshProUGUI subtask;
     public Animator anim;
+    List<string> taskQueue = new List<string>();
 
     void Start()
     {
-        
+        StartCoroutine(checkTasks());
     }
 
-    void Update()
+    public void NewTask(string task)
     {
-        
+        taskQueue.Add(task);
     }
-
 
     public void EndQuitTasks()
     {
@@ -40,7 +41,21 @@ public class TaskManager : MonoBehaviour
 
         anim.SetTrigger("Update");
         yield return new WaitForSeconds(seconds);
-        subtask.text = "· " + newSubtask;
+        subtask.text = newSubtask;
         yield return new WaitForSeconds(0.51f);
+    }
+
+    public IEnumerator checkTasks()
+    {
+        while (true) {
+            if (taskQueue.Count > 0 && !DialogManager.isConversation)
+            {
+                UpdateSubtask(taskQueue[0]);
+                taskQueue.RemoveAt(0);
+                yield return new WaitForSecondsRealtime(2);
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

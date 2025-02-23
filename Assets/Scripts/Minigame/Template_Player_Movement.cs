@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Template_Player_Movement : MonoBehaviour
 {
     //this script must be placed within the player to work
+    //public int deathCounter = 0;
+    
     Transform player_t;
     Rigidbody2D player_r;
     BoxCollider2D player_c;
     Transform player_ground;
     Transform player_axis;
+    [SerializeField] TextMeshProUGUI text;
 
     //camera
     Camera cam;
@@ -22,6 +27,15 @@ public class Template_Player_Movement : MonoBehaviour
     float jump_tim = 0.5f;
     float jump_tim_t = 0.5f;
     public int is_jumping = 0;
+
+
+    float time = 20f;
+    float timer = 1f;
+    float cur_timer = 1f;
+
+    public bool diable = false;
+    public bool propulse = false;
+    int no = 0;
     void Start()
     {
         //obtaining variables
@@ -34,6 +48,7 @@ public class Template_Player_Movement : MonoBehaviour
         player_ground = player_t.Find("TP_ground");
         player_axis = player_t.Find("TP_axis");
         cam = Camera.main;
+        StateManager.instance.deathCounter++;
     }
 
     // Update is called once per frame
@@ -43,6 +58,7 @@ public class Template_Player_Movement : MonoBehaviour
         VerticalMove();
         Hand();
         Cam();
+        Time_pas();
     }
 
     void HorizontalMove()
@@ -86,14 +102,13 @@ public class Template_Player_Movement : MonoBehaviour
 
     void Jump(){
         player_r.AddForce(new Vector2(0,1f).normalized * y_intensity,ForceMode2D.Impulse);
+        if(StateManager.instance.miniGameCompleteCount > 0) AudioManager.instance.PlayJumpSound();
     }
 
     void Cam()
     {
         //fixed camera in one axis
-        cam.transform.position = new Vector3(cam.transform.position.x,
-                                             player_t.position.y + cam_y_offset,
-                                             cam.transform.position.z);
+        cam.transform.position = new Vector3(0.59f, Mathf.Clamp(player_t.position.y,1.99f,115.82f) + cam_y_offset, cam.transform.position.z);
     }
 
     void Hand()
@@ -102,8 +117,38 @@ public class Template_Player_Movement : MonoBehaviour
         for(int i=0;i<hit.Length;i++){
             if(hit[i].tag == "clock"){
                 hit[i].gameObject.GetComponent<Renderer>().enabled = false;
+                hit[i].gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                time += 7f;
             }
         }
+    }
+
+    void Time_pas(){
+        //will reduce by one second
+        cur_timer -= Time.deltaTime;
+        if(cur_timer <= 0 && time > 0){
+            cur_timer = timer;
+            time -= 1;
+            text.SetText(time.ToString());
+        }
+        propulse = false;
+        if(time <= 0 && no == 0){
+            if (!diable) { 
+                propulse = true;
+                //StateManager.instance.deathCounter++;
+            }
+            else StartCoroutine(Die());
+            no = 1;
+        }
+    }
+    
+    public IEnumerator Die()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<Animator>().SetTrigger("Die");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnDrawGizmos(){

@@ -6,10 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class StateManager : MonoBehaviour
 {
-   private static StateManager instance;
+   public static StateManager instance;
    
-   public int state = 0;
+   public int state = 1;
+   public enum GameState {Cutscene, FreeRoam, Dialog}
 
+   public bool[] dialogsCompleted = new bool[7];
+   public GameState gameState;
+    public int miniGameCompleteCount;
+    public int deathCounter;
    private void Awake()
    {
       if (instance != null)
@@ -24,12 +29,43 @@ public class StateManager : MonoBehaviour
 
    private void Start()
    {
-      InvokeRepeating("UpdateStateInt", 0, 0.1f);
+        //InvokeRepeating("UpdateStateInt", 0, 0.1f);
+
+        //print(gameObject);
    }
 
-   private void UpdateStateInt()
+    public void CompleteMiniGame()
+    {
+        miniGameCompleteCount++;
+    }
+
+   public void MarkAsSpoke(int index)
    {
-      state = SceneManager.GetActiveScene().buildIndex;
-      
+      dialogsCompleted[index] = true;
+   }
+
+   public void ResetDialogs()
+   {
+      for (int i = 0; i < dialogsCompleted.Length; i++)
+      {
+         dialogsCompleted[i] = false;
+      }
+   }
+   public bool CheckIfSpokenWithAll()
+   {
+      bool allSpoken = false;
+      for (int i = 0; i < dialogsCompleted.Length; i++)
+      {
+         if (dialogsCompleted[i] == true)
+         {
+            allSpoken = true;
+         }
+         else
+         {
+            allSpoken = false;
+            break;
+         }
+      }
+      return allSpoken;
    }
 }

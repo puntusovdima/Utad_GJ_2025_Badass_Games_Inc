@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vcam: {fileID: 0}
   playerMovement: {fileID: 0}
+  interactionsManager: {fileID: 0}
+  cmPosition: {x: -6.2, y: -1.2288, z: -10}
 --- !u!1102 &-1985787808762419521
 AnimatorState:
   serializedVersion: 6
@@ -101,7 +103,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -1985787808762419521}
-    m_Position: {x: 290, y: 50, z: 0}
+    m_Position: {x: 430, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 780441806024790711}
     m_Position: {x: 427.7546, y: 140.08832, z: 0}
@@ -129,9 +131,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.75
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

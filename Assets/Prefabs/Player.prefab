@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: -1083505473, guid: b5e4d56fc80d79c4792c0e9a68f881d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 936bf1bb8a9f73f41a7fd0c873e9a028, type: 2}
   sm: {fileID: 0}
   speed: 7
+  canMove: 1
 --- !u!50 &3728998684346493034
 Rigidbody2D:
   serializedVersion: 4
@@ -197,8 +198,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0, y: -0.00027942657}
+  m_Size: {x: 0.8595432, y: 1.6471725}
   m_Direction: 0
 --- !u!114 &4682031197826614940
 MonoBehaviour:
@@ -212,8 +213,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dbd602c407a54a4fb4a862152c62537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactionManager: {fileID: 0}
   actionAnchor: {fileID: 5126467390371522430}
-  anchorSizeX: 1
+  anchorSizeX: 3.5
   anchorSizeY: 2
   showGizmos: 1
   interactLayer:
@@ -230,7 +232,7 @@ Animator:
   m_GameObject: {fileID: 8807791854455723316}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6299dccc388f7f3479d743749059429c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 936bf1bb8a9f73f41a7fd0c873e9a028, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -266,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 8950242582397529666}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.05, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -10,11 +10,11 @@ public class FinalPcUi : MonoBehaviour
     // public Image[] Images;
     private bool laptopIsOn = false;
     public Image laptopImage;
-    public Image onButtonImage;
+    // public Image onButtonImage;
     public GameObject SendButton;
     public Image SendButtonImage;
     public Sprite[] SendButtonSprites;
-    public Sprite[] onButtonSprites;
+    // public Sprite[] onButtonSprites;
     public Sprite[] sprites;
     public Animator anim;
 
@@ -32,23 +32,24 @@ public class FinalPcUi : MonoBehaviour
         gameObject.SetActive(true);
         Time.timeScale = 1;
         // Debug.Log("Opening laptop");
+        StartTheComputer();
     }
     public void StartTheComputer()
     {
-        laptopIsOn = !laptopIsOn;
-        if (laptopIsOn)
-        {
-            onButtonImage.sprite = onButtonSprites[0];
+        // laptopIsOn = !laptopIsOn;
+        // if (laptopIsOn)
+        // {
+            // onButtonImage.sprite = onButtonSprites[0];
             laptopImage.sprite = sprites[0];
             StartCoroutine(LoadWindows(loadWindowsDelay));
-        }
-        else
-        {
-            StopAllCoroutines();
-            SendButton.SetActive(false);
-            onButtonImage.sprite = onButtonSprites[2];
-            laptopImage.sprite = sprites[4];
-        }
+        // }
+        // else
+        // {
+        //     StopAllCoroutines();
+        //     SendButton.SetActive(false);
+        //     onButtonImage.sprite = onButtonSprites[2];
+        //     laptopImage.sprite = sprites[4];
+        // }
     }
 
     private IEnumerator LoadWindows(float delay)
@@ -56,7 +57,7 @@ public class FinalPcUi : MonoBehaviour
         yield return new WaitForSeconds(delay);
         
         laptopImage.sprite = sprites[1];
-        onButtonImage.sprite = onButtonSprites[1];
+        // onButtonImage.sprite = onButtonSprites[1];
         SendButton.SetActive(true);
     }
 

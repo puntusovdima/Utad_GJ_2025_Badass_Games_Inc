@@ -56,6 +56,7 @@ public class ComputerSceneTransition : MonoBehaviour
         targetCameraSize = 1.8f;
         await Task.Delay(fadeInStart);
         fadeInAnim.SetTrigger("FadeIn");
+        Debug.Log("Zoom In");
         await Task.Delay(6650);
         TransitionToNextScene(transitionSceneIndex);
     }

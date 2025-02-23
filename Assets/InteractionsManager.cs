@@ -214,6 +214,8 @@ public class InteractionsManager : MonoBehaviour
             else if (stateManager.state < 4)
             {
                 SetState(4);
+                AudioManager.instance.PlayComputerStartUpSound();
+                Debug.Log("ENTER SECOND MINI GAME");
                 Camera.main.GetComponent<ComputerSceneTransition>().ZoomIn(3);
             }
         }

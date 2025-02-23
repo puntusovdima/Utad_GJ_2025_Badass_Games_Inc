@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class Scene_Switch : MonoBehaviour
 {
-    
+    Template_Player_Movement _templatePlayerMovement;
     Transform origin_t;
     void Start()
     {
+        _templatePlayerMovement = GameObject.FindGameObjectWithTag("player").GetComponent<Template_Player_Movement>();
         origin_t = GetComponent<Transform>();
     }
 
@@ -18,7 +19,7 @@ public class Scene_Switch : MonoBehaviour
     {
         Collider2D[] hit = Physics2D.OverlapBoxAll(origin_t.position,new Vector2(20f,20f),0f);
         for(int i = 0;i < hit.Length ; i++){
-            if(hit[i].tag == "player"){
+            if(hit[i].tag == "player" || _templatePlayerMovement.deathCounter >= 3){
                 //we switch scenes
                 StateManager.instance.CompleteMiniGame();
                 SceneManager.LoadScene(1);

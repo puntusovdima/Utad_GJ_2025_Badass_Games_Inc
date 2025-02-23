@@ -99,6 +99,7 @@ public class Template_Player_Movement : MonoBehaviour
 
     void Jump(){
         player_r.AddForce(new Vector2(0,1f).normalized * y_intensity,ForceMode2D.Impulse);
+        AudioManager.instance.PlayJumpSound();
     }
 
     void Cam()

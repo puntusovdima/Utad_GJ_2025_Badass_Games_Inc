@@ -78,20 +78,21 @@ public class FinalPcUi : MonoBehaviour
         }
     }
 
-    public void SendGame()
+    public async void SendGame()
     {
-        //laptopImage.sprite = sprites[3];
+        laptopImage.sprite = sprites[3];
         anim.SetTrigger(AlmostMidnight);
         SendButtonImage.sprite = SendButtonSprites[2];
         SendButton.SetActive(false);
         // call the finish game logic here
+        await Task.Delay(8000);
+        FinishTheGame();
     }
 
-    public async void FinishTheGame()
+    public void FinishTheGame()
     {
-        laptopImage.sprite = sprites[3];
         Debug.Log("Congratulations! You passed the game!");
-        await Task.Delay(3000);
+        laptopImage.sprite = sprites[4];
         gameObject.SetActive(false);
         SceneManager.LoadScene(4);
     }

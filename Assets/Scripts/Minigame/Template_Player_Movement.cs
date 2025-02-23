@@ -7,6 +7,8 @@ using TMPro;
 public class Template_Player_Movement : MonoBehaviour
 {
     //this script must be placed within the player to work
+    public int deathCounter = 0;
+    
     Transform player_t;
     Rigidbody2D player_r;
     BoxCollider2D player_c;
@@ -138,6 +140,7 @@ public class Template_Player_Movement : MonoBehaviour
     
     public IEnumerator Die()
     {
+        deathCounter++;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Animator>().SetTrigger("Die");

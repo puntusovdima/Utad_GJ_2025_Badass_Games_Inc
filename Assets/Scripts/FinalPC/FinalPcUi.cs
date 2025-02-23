@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 public class FinalPcUi : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class FinalPcUi : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        //OpenLaptop();
     }
 
     public void OpenLaptop()
@@ -77,16 +79,19 @@ public class FinalPcUi : MonoBehaviour
 
     public void SendGame()
     {
-        laptopImage.sprite = sprites[4];
+        //laptopImage.sprite = sprites[3];
         anim.SetTrigger(AlmostMidnight);
         SendButtonImage.sprite = SendButtonSprites[2];
         SendButton.SetActive(false);
         // call the finish game logic here
     }
 
-    public void FinishTheGame()
+    public async void FinishTheGame()
     {
         laptopImage.sprite = sprites[3];
         Debug.Log("Congratulations! You passed the game!");
+        await Task.Delay(3000);
+        gameObject.SetActive(false);
+        CutsceneManager.instance.PlayCutscene6();
     }
 }

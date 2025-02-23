@@ -30,6 +30,7 @@ public class FinalPcUi : MonoBehaviour
     {
         // onButtonImage.sprite = onButtonSprites[0];
         gameObject.SetActive(true);
+        Time.timeScale = 1;
         // Debug.Log("Opening laptop");
     }
     public void StartTheComputer()
@@ -75,6 +76,7 @@ public class FinalPcUi : MonoBehaviour
 
     public void SendGame()
     {
+        laptopImage.sprite = sprites[4];
         anim.SetTrigger(AlmostMidnight);
         SendButtonImage.sprite = SendButtonSprites[2];
         SendButton.SetActive(false);

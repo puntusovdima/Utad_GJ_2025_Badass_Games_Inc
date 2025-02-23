@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -106,33 +107,46 @@ public class Template_buggy : MonoBehaviour
 
 
         //we will play the animation here
-        if(is_frozen == 1){
-            if(dumb_ah.GetComponent<Transform>().rotation.z * Mathf.Rad2Deg * 2 >= -60f){
+        if (is_frozen == 1)
+        {
+            try { Destroy(GameObject.Find("Virtual Camera")); }
+            catch { };
+            cam.GetComponent<CinemachineBrain>().enabled = false;
+            if (dumb_ah.GetComponent<Transform>().rotation.z * Mathf.Rad2Deg * 2 >= -60f)
+            {
                 dumb_ah.GetComponent<Rigidbody2D>().MoveRotation(add);
-                dumb_ah.GetComponent<Transform>().localScale = new Vector3((add_t * -1) +1,(add_t * -1) +1,dumb_ah.GetComponent<Transform>().localScale.z);
+                dumb_ah.GetComponent<Transform>().localScale = new Vector3((add_t * -1) + 1, (add_t * -1) + 1, dumb_ah.GetComponent<Transform>().localScale.z);
                 //we have to make the movement exponential so
                 add = (add - 0.2f) * 1.03f;
                 add_t = add * 0.05f;
-            } else {
-                if(cd2 == 0){
+            }
+            else
+            {
+                if (cd2 == 0)
+                {
                     cd2 = 1;
-                    if(shake_lock == 0){
+                    if (shake_lock == 0)
+                    {
                         StartCoroutine(Camera_shake.ShakeCamera(cam, 0.2f, 0.3f));
                         shake_lock = 1;
                     }
                 }
             }
-            if(cd2 == 1){
+            if (cd2 == 1)
+            {
                 cur_timer2 -= Time.deltaTime;
-                if(cur_timer2 <= 0){
+                if (cur_timer2 <= 0)
+                {
                     cur_timer2 = timer2;
                     cd2 = 0;
                     dumb_ah.GetComponent<Rigidbody2D>().gravityScale = 1f;
                 }
             }
-            if(shake_lock == 2){
+            if (shake_lock == 2)
+            {
                 cur_timer3 -= Time.deltaTime;
-                if(cur_timer3 <= 0){
+                if (cur_timer3 <= 0)
+                {
                     cur_timer3 = timer3;
                     shake_lock = 3;
                     StartCoroutine(Camera_shake.ShakeCamera(cam, 0.2f, 0.3f));
@@ -140,6 +154,7 @@ public class Template_buggy : MonoBehaviour
             }
 
         }
+        else cam.GetComponent<CinemachineBrain>().enabled = true;
 
         //after meeting the billion conditions lets check for the player
         Collider2D[] chase = Physics2D.OverlapCircleAll(origin_t.position,6f);

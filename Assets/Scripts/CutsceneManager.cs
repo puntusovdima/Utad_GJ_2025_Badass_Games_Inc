@@ -5,6 +5,7 @@ using UnityEngine;
 public class CutsceneManager : MonoBehaviour
 {
     [SerializeField] DialogManager dialogueManager;
+    public TaskManager taskManager;
     public InteractionsManager interactionsManager;
     public static CutsceneManager instance;
     string[] dimaLines; //0
@@ -208,6 +209,8 @@ public class CutsceneManager : MonoBehaviour
         "My computer is on the far right. Let’s see what do we have for now"
         };
         dialogueManager.NewDialog(senenLines, null, false);
+
+        taskManager.NewTask("· Check the playable prototype");
     }
     #endregion
 
@@ -284,6 +287,8 @@ public class CutsceneManager : MonoBehaviour
         "What am I supposed to do now?"
         };
         dialogueManager.NewDialog(senenLines, null, false);
+
+        taskManager.NewTask("· Speak with your colleagues");
     }
     public void PlayCutscene4Mario()
     {
@@ -460,6 +465,7 @@ public class CutsceneManager : MonoBehaviour
     public void PlayCutscene5()
     {
         dialogueManager.NewDialog("It’s time to check the result.", null, false);
+        taskManager.NewTask("· Playtest the last version of your game");
     }
 
     public void PlayCutscene6()

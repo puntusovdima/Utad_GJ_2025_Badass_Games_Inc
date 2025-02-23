@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class DialogManager : MonoBehaviour
 {
     [Header("References")]
+    public InteractionsManager interactionsManager;
     public GameObject dialogBox;
     public GameObject taskBox;
     public TMPro.TextMeshProUGUI dialogText;
@@ -29,6 +30,7 @@ public class DialogManager : MonoBehaviour
     [HideInInspector] public Sprite lastSpeakerSprite = null;
 
     //Privates
+    [HideInInspector] public bool isConversation = false;
     private bool isActiveDialog = false;
     private List<string> dialogLinesQueue = new List<string>();
     private List<Sprite> dialogCharacterSpritesQueue = new List<Sprite>();
@@ -83,8 +85,6 @@ public class DialogManager : MonoBehaviour
 
     public IEnumerator ConversationManager()
     {
-        bool isConversation = false;
-
         while (true)
         {
             if (dialogLinesQueue.Count > 0 && !isConversation)
@@ -99,8 +99,18 @@ public class DialogManager : MonoBehaviour
                 isConversation = false;
                 dialogBox.SetActive(false);
                 ResetDialogAnimators();
+                if (!taskBox.gameObject.activeSelf)
+                {
+                    taskBox.gameObject.SetActive(true);
+                    taskBox.GetComponent<Animator>().SetTrigger("HideStart");
+                }
                 taskBox.GetComponent<Animator>().SetBool("isShown", true);
                 Time.timeScale = 1;
+
+                if (interactionsManager.GetState() == 5)
+                {
+                    interactionsManager.PcManager.OpenLaptop();
+                }
             }
 
             if (isConversation)
@@ -115,7 +125,7 @@ public class DialogManager : MonoBehaviour
                     else dialogSpeaker.color = alphaManager[1];
                     dialogSpeaker.sprite = npcSprite;
 
-                    
+
                     string npcName = "";
                     if (npcSprite != null) npcName = npcNames[characterSprites.IndexOf(npcSprite)];
                     dialogSpeaker.transform.GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = npcName;

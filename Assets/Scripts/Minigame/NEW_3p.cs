@@ -37,6 +37,7 @@ public class NEW_3p : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapBoxAll(plat_t.position, new Vector2(4.1f,1f),0f);
         for(int i=0;i<hit.Length;i++){
             if(hit[i].tag == "player" && hit[i].GetComponent<Rigidbody2D>().velocity.y <= 0 && cd == 0 && is_shown == 1){
+                Debug.Log("rah");
                 cd = 1;
                 cd2 = 1;
             }

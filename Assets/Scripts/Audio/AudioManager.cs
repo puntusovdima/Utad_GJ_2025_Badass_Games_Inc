@@ -60,8 +60,9 @@ public class AudioManager : MonoBehaviour
     {
         introSound.Play();
         Debug.Log("Logo appears");
-        await Task.Delay(7000);
+        await Task.Delay(5500);
         Debug.Log("Something is wrong ! ");
+        introSound.Stop();
         somethingWentWrongAudio.Play();
     }
 

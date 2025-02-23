@@ -19,7 +19,10 @@ public class CutsceneManager : MonoBehaviour
 
     void Start()
     {
-        if (instance == null) instance = this;
+        if (instance == null) { 
+            instance = this;
+            Debug.Log(name + " is in the scene !!");
+        }
 
         //PlayCutsceneIntro();
         //PlayCutscene1();

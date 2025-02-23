@@ -91,7 +91,7 @@ public class DialogManager : MonoBehaviour
             {
                 isConversation = true;
                 dialogBox.SetActive(true);
-                taskBox.GetComponent<Animator>().SetBool("isShown", false);
+                if(taskBox != null) taskBox.GetComponent<Animator>().SetBool("isShown", false);
                 Time.timeScale = 0;
             }
             else if (dialogLinesQueue.Count == 0 && isConversation && !isActiveDialog)
@@ -99,12 +99,12 @@ public class DialogManager : MonoBehaviour
                 isConversation = false;
                 dialogBox.SetActive(false);
                 ResetDialogAnimators();
-                if (!taskBox.gameObject.activeSelf)
+                if (taskBox != null && !taskBox.gameObject.activeSelf)
                 {
                     taskBox.gameObject.SetActive(true);
                     taskBox.GetComponent<Animator>().SetTrigger("HideStart");
                 }
-                taskBox.GetComponent<Animator>().SetBool("isShown", true);
+                if(taskBox != null) taskBox.GetComponent<Animator>().SetBool("isShown", true);
                 Time.timeScale = 1;
 
                 if (interactionsManager.GetState() == 5)

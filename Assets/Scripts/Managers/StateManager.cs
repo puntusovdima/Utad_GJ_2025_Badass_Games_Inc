@@ -14,6 +14,7 @@ public class StateManager : MonoBehaviour
    public bool[] dialogsCompleted = new bool[7];
    public GameState gameState;
     public int miniGameCompleteCount;
+    public int deathCounter;
    private void Awake()
    {
       if (instance != null)

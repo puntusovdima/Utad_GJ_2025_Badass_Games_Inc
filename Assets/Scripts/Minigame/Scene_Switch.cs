@@ -19,11 +19,17 @@ public class Scene_Switch : MonoBehaviour
     {
         Collider2D[] hit = Physics2D.OverlapBoxAll(origin_t.position,new Vector2(20f,20f),0f);
         for(int i = 0;i < hit.Length ; i++){
-            if(hit[i].tag == "player" || _templatePlayerMovement.deathCounter >= 3){
+            if(hit[i].tag == "player"){
                 //we switch scenes
                 StateManager.instance.CompleteMiniGame();
                 SceneManager.LoadScene(1);
             }
+        }
+
+        if(StateManager.instance.miniGameCompleteCount == 0 && StateManager.instance.deathCounter >= 4) {
+            StateManager.instance.CompleteMiniGame();
+            StateManager.instance.deathCounter = 0;
+            SceneManager.LoadScene(1);
         }
     }
 

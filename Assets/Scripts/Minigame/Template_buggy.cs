@@ -44,6 +44,8 @@ public class Template_buggy : MonoBehaviour
     public bool to_change = false;
 
     bool what;
+    bool haveDied = false;
+
     void Start()
     {
         //assigning variables
@@ -64,7 +66,7 @@ public class Template_buggy : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapCircleAll(origin_t.position,1.4f);
         what = GameObject.Find("Template_player").GetComponent<Template_Player_Movement>().propulse;
         if(what == true){
-            Debug.Log("a");
+            //Debug.Log("a");
             hit[0] = GameObject.Find("Template_player").GetComponent<Collider2D>();
         }
         for(int i = 0;i<hit.Length;i++){

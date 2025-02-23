@@ -7,7 +7,7 @@ using TMPro;
 public class Template_Player_Movement : MonoBehaviour
 {
     //this script must be placed within the player to work
-    public int deathCounter = 0;
+    //public int deathCounter = 0;
     
     Transform player_t;
     Rigidbody2D player_r;
@@ -48,6 +48,7 @@ public class Template_Player_Movement : MonoBehaviour
         player_ground = player_t.Find("TP_ground");
         player_axis = player_t.Find("TP_axis");
         cam = Camera.main;
+        StateManager.instance.deathCounter++;
     }
 
     // Update is called once per frame
@@ -101,7 +102,7 @@ public class Template_Player_Movement : MonoBehaviour
 
     void Jump(){
         player_r.AddForce(new Vector2(0,1f).normalized * y_intensity,ForceMode2D.Impulse);
-        AudioManager.instance.PlayJumpSound();
+        if(StateManager.instance.miniGameCompleteCount > 0) AudioManager.instance.PlayJumpSound();
     }
 
     void Cam()
@@ -132,7 +133,10 @@ public class Template_Player_Movement : MonoBehaviour
         }
         propulse = false;
         if(time <= 0 && no == 0){
-            if (!diable) propulse = true;
+            if (!diable) { 
+                propulse = true;
+                //StateManager.instance.deathCounter++;
+            }
             else StartCoroutine(Die());
             no = 1;
         }
@@ -140,7 +144,6 @@ public class Template_Player_Movement : MonoBehaviour
     
     public IEnumerator Die()
     {
-        deathCounter++;
         GetComponent<Rigidbody2D>().gravityScale = 0;
         GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         GetComponent<Animator>().SetTrigger("Die");

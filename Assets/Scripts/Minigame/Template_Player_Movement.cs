@@ -101,9 +101,7 @@ public class Template_Player_Movement : MonoBehaviour
     void Cam()
     {
         //fixed camera in one axis
-        cam.transform.position = new Vector3(cam.transform.position.x,
-                                             player_t.position.y + cam_y_offset,
-                                             cam.transform.position.z);
+        cam.transform.position = new Vector3(0.59f, Mathf.Clamp(player_t.position.y,1.99f,115.82f) + cam_y_offset, cam.transform.position.z);
     }
 
     void Hand()
@@ -121,7 +119,7 @@ public class Template_Player_Movement : MonoBehaviour
     void Time_pas(){
         //will reduce by one second
         cur_timer -= Time.deltaTime;
-        if(cur_timer <= 0){
+        if(cur_timer <= 0 && time > 0){
             cur_timer = timer;
             time -= 1;
             text.SetText(time.ToString());

@@ -133,7 +133,7 @@ public class DialogManager : MonoBehaviour
                     }
 
                     isActiveDialog = true;
-                    StartCoroutine(DisplayDialog(line));
+                    StartCoroutine(DisplayDialog(line, isNpcTalking));
 
                     dialogLinesQueue.RemoveAt(0);
                     dialogCharacterSpritesQueue.RemoveAt(0);
@@ -145,14 +145,14 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public IEnumerator DisplayDialog(string msg)
+    public IEnumerator DisplayDialog(string msg, bool npcTalk)
     {
         dialogText.text = "";
         foreach (char c in msg)
         {
 
             dialogText.text = dialogText.text + c;
-            if(lastSpeaker != null) AudioManager.instance.PlayBlablaSound(characterSprites.IndexOf(lastSpeaker));
+            if(npcTalk) AudioManager.instance.PlayBlablaSound(characterSprites.IndexOf(lastSpeaker));
             else AudioManager.instance.PlayBlablaSound(7);
 
             yield return new WaitForSecondsRealtime(speed);
